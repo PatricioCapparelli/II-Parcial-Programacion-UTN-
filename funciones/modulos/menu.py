@@ -1,4 +1,5 @@
 import pygame as pg
+from funciones.elegir_nivel import pantalla_dificultad
 from funciones.modulos.juego import jugar
 from funciones.modulos.puntajes import mostrar_puntajes_json
 
@@ -23,6 +24,8 @@ def dibujar_botones(pantalla, fuente, colores):
         )
 
 def menu_principal(pantalla, fondo, fuente, colores):
+    dificultad_seleccionada = None
+    nivel = None
     corriendo = True
     while corriendo:
         pantalla.blit(fondo, (0, 0))
@@ -36,9 +39,13 @@ def menu_principal(pantalla, fondo, fuente, colores):
                         if texto == "Salir":
                             corriendo = False
                         elif texto == "Nivel":
-                            print("Elegir nivel...")
-                        elif texto == "Jugar":
+                            nivel = pantalla_dificultad(pantalla, fuente, colores)
+                            if nivel != None:
+                                dificultad_seleccionada = nivel  # guardar el nuevo nivel
+                                print("Nivel seleccionado:", dificultad_seleccionada)
+                        elif texto == "Jugar" and dificultad_seleccionada != None:
                             jugar(pantalla, fuente, colores)
+                            print("Jugar")
                         elif texto == "Ver Puntajes":
                             mostrar_puntajes_json(pantalla, fuente, colores)
         pg.display.flip()
