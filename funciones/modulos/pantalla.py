@@ -1,12 +1,11 @@
 import pygame as pg
 
 def configurar_pantalla():
-    # Inicializa pygame y mixer aqui o asume que ya estan inicializados en main
     pantalla = pg.display.set_mode((800, 600))
     pg.display.set_caption("Batalla Naval - Menu Inicial")
     
-    fondo = pg.image.load("01.png")
-    fuente = pg.font.SysFont("Courier New", 30)
+    fondo = pg.image.load("batalla-naval.webp")
+    fuente = pg.font.SysFont("CASTELLAR", 30)
     
     colores = {
     "BLANCO": (255, 255, 255),
@@ -14,6 +13,5 @@ def configurar_pantalla():
     "GRIS": (200, 200, 200),
     "NEGRO": (0, 0, 0)
 }
-
     
     return pantalla, fondo, fuente, colores

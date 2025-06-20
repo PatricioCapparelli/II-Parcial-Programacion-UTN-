@@ -16,7 +16,7 @@ def dibujar_botones(pantalla, fuente, colores):
     for texto, rect in botones.items():
         pg.draw.rect(pantalla, colores["AZUL"], rect)
         pg.draw.rect(pantalla, colores["NEGRO"], rect, 2)
-        texto_render = fuente.render(texto, True, colores["BLANCO"])
+        texto_render = fuente.render(texto, True, colores["NEGRO"])
         pantalla.blit(
             texto_render,
             (rect.x + (rect.width - texto_render.get_width()) // 2,
@@ -31,9 +31,7 @@ def menu_principal(pantalla, fondo, fuente, colores):
         pantalla.blit(fondo, (0, 0))
         dibujar_botones(pantalla, fuente, colores)
         for evento in pg.event.get():
-            if evento.type == pg.QUIT:
-                corriendo = False
-            elif evento.type == pg.MOUSEBUTTONDOWN and evento.button == 1:
+            if evento.type == pg.MOUSEBUTTONDOWN and evento.button == 1:
                 for texto, rect in botones.items():
                     if rect.collidepoint(evento.pos):
                         if texto == "Salir":
