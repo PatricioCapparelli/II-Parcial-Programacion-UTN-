@@ -22,6 +22,4 @@ def configurar_pantalla():
     "color_con_alpha": (0, 0, 0, 0)
 }
 
-
-    
     return pantalla, fondo, fuente, colores

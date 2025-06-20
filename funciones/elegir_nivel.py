@@ -24,10 +24,7 @@ def pantalla_dificultad(pantalla, fuente, colores) -> str:
             pantalla.blit(render, (rect.x + 40, rect.y + 10))
 
         for evento in pg.event.get():
-            if evento.type == pg.QUIT:
-                pg.quit()
-                exit()
-            elif evento.type == pg.MOUSEBUTTONDOWN and evento.button == 1:
+            if evento.type == pg.MOUSEBUTTONDOWN and evento.button == 1:
                 for texto, rect in botones_niveles.items():
                     if rect.collidepoint(evento.pos):
                         if texto == "VOLVER":
