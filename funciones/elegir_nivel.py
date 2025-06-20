@@ -1,5 +1,5 @@
 import pygame as pg
-from funciones.modulos.pantalla import*
+from funciones.modulos.pantalla import *
 
 
 def pantalla_dificultad(pantalla, fuente, colores) -> str:
@@ -10,10 +10,11 @@ def pantalla_dificultad(pantalla, fuente, colores) -> str:
         "VOLVER": pg.Rect(300, 420, 200, 50),
     }
     fuente2 = pg.font.SysFont("Berlin Sans FB", 42)
+    dificultad = None
 
 
     while True:
-        fondo2 = pg.image.load("II-Parcial-Programacion-UTN-/Publico/music/02.jpg")
+        fondo2 = pg.image.load("II-Parcial-Programacion-UTN-/Publico/recursos/02.jpg")
         pantalla.blit(fondo2, (0, 0))
         titulo = fuente2.render("SELECCIONA LA DIFICULTAD", True, colores["NEGRO"])
         pantalla.blit(titulo, (150, 80))
@@ -27,7 +28,14 @@ def pantalla_dificultad(pantalla, fuente, colores) -> str:
             if evento.type == pg.MOUSEBUTTONDOWN and evento.button == 1:
                 for texto, rect in botones_niveles.items():
                     if rect.collidepoint(evento.pos):
-                        if texto == "VOLVER":
-                            return None
                         
+                        if texto == "FACIL":
+                            dificultad = "facil"
+                        elif texto == "MEDIO":
+                            dificultad = "medio"
+                        elif texto == "DIFICIL":
+                            dificultad = "dificil"
+
+
         pg.display.flip()
+        return(dificultad)

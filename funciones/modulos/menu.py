@@ -3,6 +3,7 @@ from funciones.elegir_nivel import pantalla_dificultad
 from funciones.modulos.juego import jugar
 from funciones.modulos.puntajes import mostrar_puntajes_json
 import pygame.mixer as mixer
+from funciones.modulos.tablero import *
 
 mixer.init()
 # Botones del menu (definidos una sola vez)
@@ -31,7 +32,7 @@ def menu_principal(pantalla, fondo, fuente, colores, titulo):
     nivel = None
     corriendo = True
     musica_pausada = False
-    mixer.music.load("II-Parcial-Programacion-UTN-/Publico/music/Musica_Menu.mp3") #Maquillar la musica
+    mixer.music.load("II-Parcial-Programacion-UTN-/Publico/recursos/Musica_Menu.mp3") #Maquillar la musica
     mixer.music.play()
     mixer.music.set_volume(0.5)
     while corriendo:
@@ -51,7 +52,8 @@ def menu_principal(pantalla, fondo, fuente, colores, titulo):
                                 print("Nivel seleccionado:", dificultad_seleccionada)
                         elif texto == "JUGAR" and dificultad_seleccionada != None:
                             jugar(pantalla, fuente, colores)
-                            print("JUGAR")
+                            mostrar_tablero(pantalla, crear_tablero_inicial(dificultad_seleccionada))
+                            
                         elif texto == "MUSICA":
                             if musica_pausada:
                                 mixer.music.unpause()
