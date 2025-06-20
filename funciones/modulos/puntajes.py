@@ -13,6 +13,12 @@ def guardar_puntaje_json(nick, puntaje):
         json.dump(datos, f, indent=4)
 
 def mostrar_puntajes_json(pantalla, fuente, colores):
+    fondo2 = pg.image.load("02.jpg")
+    pantalla.blit(fondo2, (0, 0))
+
+    titulo_render = fuente.render("PUNTAJES", True, colores["NEGRO"])
+    pantalla.blit(titulo_render, (250, 60))  # Mostrar el titulo arriba
+
     archivo = "puntajes.json"
     datos = []
     if os.path.exists(archivo):
@@ -28,9 +34,20 @@ def mostrar_puntajes_json(pantalla, fuente, colores):
         texto = fuente.render(f"{entrada['nick']}: {entrada['puntaje']}", True, colores["NEGRO"])
         pantalla.blit(texto, (250, y))
         y += 40
+
+    boton_volver = pg.Rect(300, y + 40, 200, 50) 
+    pg.draw.rect(pantalla, colores["NEGRO"], boton_volver, width=2, border_radius=10)
+    texto_volver = fuente.render("VOLVER", True, colores["NEGRO"])
+    text_rect = texto_volver.get_rect(center=boton_volver.center) # Centrar texto dentro del boton
+    pantalla.blit(texto_volver, text_rect)
+
     pg.display.flip()
+
     esperando = True
     while esperando:
         for evento in pg.event.get():
-            if evento.type == pg.QUIT or (evento.type == pg.KEYDOWN and evento.key == pg.K_ESCAPE):
+            if evento.type == pg.KEYDOWN and evento.key == pg.K_ESCAPE:
                 esperando = False
+            elif evento.type == pg.MOUSEBUTTONDOWN and evento.button == 1:
+                if boton_volver.collidepoint(evento.pos):
+                    esperando = False

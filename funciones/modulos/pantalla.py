@@ -4,7 +4,6 @@ import pygame.mixer as mixer
 mixer.init()
 
 def configurar_pantalla():
-    # Inicializa pygame y mixer aqui o asume que ya estan inicializados en main
     pantalla = pg.display.set_mode((800, 600))
     pg.display.set_caption("Batalla Naval - Menu Inicial")
     
@@ -12,6 +11,9 @@ def configurar_pantalla():
     titulo = pg.image.load("04.jpeg")
     titulo = pg.transform.scale(titulo,(800,140))
     
+
+    fuente = pg.font.SysFont("CASTELLAR", 30)
+    fondo = pg.image.load("batalla-naval.webp")
     fuente = pg.font.SysFont("CASTELLAR", 30)
    
     colores = {
@@ -26,3 +28,5 @@ def configurar_pantalla():
 
     
     return pantalla, fondo, fuente, colores, titulo
+
+    return pantalla, fondo, fuente, colores
