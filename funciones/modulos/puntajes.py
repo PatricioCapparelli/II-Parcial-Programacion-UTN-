@@ -19,7 +19,8 @@ def mostrar_puntajes_json(pantalla, fuente, colores):
         with open(archivo, "r", encoding="utf-8") as f:
             datos = json.load(f)
     datos_ordenados = sorted(datos, key=lambda x: x["puntaje"], reverse=True)
-    pantalla.fill(colores["GRIS"])
+    fondo2 = pg.image.load("02.jpg")
+    pantalla.blit(fondo2, (0, 0))
     titulo = fuente.render("PUNTAJES", True, colores["NEGRO"])
     pantalla.blit(titulo, (300, 50))
     y = 120

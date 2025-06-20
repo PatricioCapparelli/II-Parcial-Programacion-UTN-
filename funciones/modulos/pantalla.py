@@ -9,9 +9,11 @@ def configurar_pantalla():
     pg.display.set_caption("Batalla Naval - Menu Inicial")
     
     fondo = pg.image.load("03.jpg")
-
-    fuente = pg.font.SysFont("CASTELLAR", 30)
+    titulo = pg.image.load("04.jpeg")
+    titulo = pg.transform.scale(titulo,(800,140))
     
+    fuente = pg.font.SysFont("CASTELLAR", 30)
+   
     colores = {
     "BLANCO": (255, 255, 255),
     "AZUL": (0, 102, 204),
@@ -23,4 +25,4 @@ def configurar_pantalla():
 
 
     
-    return pantalla, fondo, fuente, colores
+    return pantalla, fondo, fuente, colores, titulo

@@ -7,8 +7,8 @@ import pygame.mixer as mixer
 pg.init()
 mixer.init()
 
-pantalla, fondo, fuente, colores = configurar_pantalla()
+pantalla, fondo, fuente, colores, titulo = configurar_pantalla()
 
-menu_principal(pantalla, fondo, fuente, colores)
+menu_principal(pantalla, fondo, fuente, colores, titulo)
 
 pg.quit()

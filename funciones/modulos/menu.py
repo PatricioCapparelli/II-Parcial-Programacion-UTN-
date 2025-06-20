@@ -26,17 +26,17 @@ def dibujar_botones(pantalla, fuente, colores):
              rect.y + (rect.height - texto_render.get_height()) // 2)
         )
 
-def menu_principal(pantalla, fondo, fuente, colores):
+def menu_principal(pantalla, fondo, fuente, colores, titulo):
     dificultad_seleccionada = None
     nivel = None
     corriendo = True
     musica_pausada = False
-
     mixer.music.load("Musica_Menu.mp3") #Maquillar la musica
     mixer.music.play()
     mixer.music.set_volume(0.5)
     while corriendo:
         pantalla.blit(fondo, (0, 0))
+        pantalla.blit(titulo, (0, 0))
         dibujar_botones(pantalla, fuente, colores)
         for evento in pg.event.get():
             if evento.type == pg.MOUSEBUTTONDOWN and evento.button == 1:
