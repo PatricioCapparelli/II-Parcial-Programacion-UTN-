@@ -7,8 +7,8 @@ def configurar_pantalla():
     pantalla = pg.display.set_mode((800, 600))
     pg.display.set_caption("Batalla Naval - Menu Inicial")
     
-    fondo = pg.image.load("03.jpg")
-    titulo = pg.image.load("05.png")
+    fondo = pg.image.load("II-Parcial-Programacion-UTN-/Publico/music/03.jpg")
+    titulo = pg.image.load("II-Parcial-Programacion-UTN-/Publico/music/05.png")
     titulo = pg.transform.scale(titulo,(800,140))
     
     

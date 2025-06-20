@@ -13,7 +13,7 @@ def pantalla_dificultad(pantalla, fuente, colores) -> str:
 
 
     while True:
-        fondo2 = pg.image.load("02.jpg")
+        fondo2 = pg.image.load("II-Parcial-Programacion-UTN-/Publico/music/02.jpg")
         pantalla.blit(fondo2, (0, 0))
         titulo = fuente2.render("SELECCIONA LA DIFICULTAD", True, colores["NEGRO"])
         pantalla.blit(titulo, (150, 80))

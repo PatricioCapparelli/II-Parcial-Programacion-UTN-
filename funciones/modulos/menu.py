@@ -31,7 +31,7 @@ def menu_principal(pantalla, fondo, fuente, colores, titulo):
     nivel = None
     corriendo = True
     musica_pausada = False
-    mixer.music.load("Musica_Menu.mp3") #Maquillar la musica
+    mixer.music.load("II-Parcial-Programacion-UTN-/Publico/music/Musica_Menu.mp3") #Maquillar la musica
     mixer.music.play()
     mixer.music.set_volume(0.5)
     while corriendo:
