@@ -1,21 +1,26 @@
 import pygame as pg
+from funciones.modulos.pantalla import*
+
 
 def pantalla_dificultad(pantalla, fuente, colores) -> str:
     botones_niveles = {
-        "Facil": pg.Rect(300, 150, 200, 50),
-        "Medio": pg.Rect(300, 230, 200, 50),
-        "Difcil": pg.Rect(300, 310, 200, 50),
-        "Volver": pg.Rect(300, 390, 200, 50),
+        "FACIL": pg.Rect(300, 180, 200, 50),
+        "MEDIO": pg.Rect(300, 260, 200, 50),
+        "DIFICIL": pg.Rect(300, 340, 200, 50),
+        "VOLVER": pg.Rect(300, 420, 200, 50),
     }
+    fuente2 = pg.font.SysFont("Berlin Sans FB", 42)
+
 
     while True:
-        pantalla.fill(colores["BLANCO"])
-        titulo = fuente.render("Selecciona la dificultad", True, colores["NEGRO"])
-        pantalla.blit(titulo, (250, 80))
+        fondo2 = pg.image.load("02.jpg")
+        pantalla.blit(fondo2, (0, 0))
+        titulo = fuente2.render("SELECCIONA LA DIFICULTAD", True, colores["NEGRO"])
+        pantalla.blit(titulo, (150, 80))
 
         for texto, rect in botones_niveles.items():
-            pg.draw.rect(pantalla, colores["NEGRO"], rect, border_radius=10)
-            render = fuente.render(texto, True, colores["BLANCO"])
+            pg.draw.rect(pantalla,colores["NEGRO"], rect, width=2, border_radius=10)
+            render = fuente.render(texto, True, colores["NEGRO"])
             pantalla.blit(render, (rect.x + 40, rect.y + 10))
 
         for evento in pg.event.get():
@@ -25,9 +30,7 @@ def pantalla_dificultad(pantalla, fuente, colores) -> str:
             elif evento.type == pg.MOUSEBUTTONDOWN and evento.button == 1:
                 for texto, rect in botones_niveles.items():
                     if rect.collidepoint(evento.pos):
-                        if texto == "Volver":
+                        if texto == "VOLVER":
                             return None
-                        else:
-                            return texto.lower()  # Devuelve "facil", "medio" o "dificil"
-
+                        
         pg.display.flip()
