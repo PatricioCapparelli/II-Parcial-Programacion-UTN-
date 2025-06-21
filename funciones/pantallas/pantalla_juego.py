@@ -67,7 +67,6 @@ def pantalla_juego(pantalla, fuente, colores, matriz):
                         elif matriz[fila][col] == 0:
                             matriz[fila][col] = 3
                             puntaje -= 1
-
         pg.display.flip()
 
-    return resultado
+    return resultado, puntaje
