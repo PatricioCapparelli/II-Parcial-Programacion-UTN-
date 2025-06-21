@@ -3,6 +3,7 @@ from funciones.elegir_nivel import pantalla_dificultad
 from funciones.modulos.juego import jugar
 from funciones.modulos.puntajes import mostrar_puntajes_json
 import pygame.mixer as mixer
+from funciones.modulos.tablero import *
 
 mixer.init()
 # Botones del menu (definidos una sola vez)
