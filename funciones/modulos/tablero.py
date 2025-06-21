@@ -2,6 +2,11 @@ import random
 from funciones.inicializar_matriz import inicializar_matriz
 import pygame as pg
 
+longitud_submarino = 1
+longitud_destructor = 2
+longitud_crucero = 3
+longitud_acorazado = 4
+
 
 def colocar_naves(matriz: list, cantidad: int, tamaño: int) -> None:
     """Coloca las naves en la matriz sin superposicion."""
@@ -73,10 +78,10 @@ def crear_tablero_inicial(nivel: str) -> list:
 
     matriz = inicializar_matriz(filas, columnas, 0)
 
-    colocar_naves(matriz, submarinos, 1)
-    colocar_naves(matriz, destructores, 2)
-    colocar_naves(matriz, cruceros, 3)
-    colocar_naves(matriz, acorazados, 4)
+    colocar_naves(matriz, submarinos, longitud_submarino)
+    colocar_naves(matriz, destructores, longitud_destructor)
+    colocar_naves(matriz, cruceros, longitud_crucero)
+    colocar_naves(matriz, acorazados, longitud_acorazado)
 
     return matriz
 def mostrar_tablero(pantalla, matriz):
