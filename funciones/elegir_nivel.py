@@ -13,7 +13,7 @@ def pantalla_dificultad(pantalla, fuente, colores) -> str:
     dificultad = None
 
 
-    while True:
+    while dificultad == None:
         fondo2 = pg.image.load("II-Parcial-Programacion-UTN-/Publico/recursos/02.jpg")
         pantalla.blit(fondo2, (0, 0))
         titulo = fuente2.render("SELECCIONA LA DIFICULTAD", True, colores["NEGRO"])
@@ -28,14 +28,16 @@ def pantalla_dificultad(pantalla, fuente, colores) -> str:
             if evento.type == pg.MOUSEBUTTONDOWN and evento.button == 1:
                 for texto, rect in botones_niveles.items():
                     if rect.collidepoint(evento.pos):
-                        
+
                         if texto == "FACIL":
                             dificultad = "facil"
                         elif texto == "MEDIO":
                             dificultad = "medio"
                         elif texto == "DIFICIL":
                             dificultad = "dificil"
+                        elif texto == "VOLVER":
+                            dificultad = "volver"
 
 
         pg.display.flip()
-        return(dificultad)
+    return dificultad
