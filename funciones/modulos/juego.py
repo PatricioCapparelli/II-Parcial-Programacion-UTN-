@@ -25,7 +25,7 @@ def pedir_nick(pantalla, fuente, colores):
         pg.display.flip()
     return nick
 
-def jugar(pantalla, fuente, colores):
+def jugar(pantalla, fuente, colores, dificultad):
     nick = pedir_nick(pantalla, fuente, colores)
     puntaje = 123  # Aquí va la lógica del juego real
     guardar_puntaje_json(nick, puntaje)

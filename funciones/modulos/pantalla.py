@@ -6,14 +6,11 @@ mixer.init()
 def configurar_pantalla():
     pantalla = pg.display.set_mode((800, 600))
     pg.display.set_caption("Batalla Naval - Menu Inicial")
-    
-    fondo = pg.image.load("II-Parcial-Programacion-UTN-/Publico/recursos/03.jpg")
-    titulo = pg.image.load("II-Parcial-Programacion-UTN-/Publico/recursos/05.png")
+    fondo = pg.image.load("publico/03.jpg")
+    titulo = pg.image.load("publico/05.png")
     titulo = pg.transform.scale(titulo,(800,140))
-    
-    
     fuente = pg.font.SysFont("CASTELLAR", 30)
-   
+
     colores = {
     "BLANCO": (255, 255, 255),
     "AZUL": (0, 102, 204),

@@ -15,8 +15,7 @@ botones = {
     "SALIR": pg.Rect(300, 480, 200, 50)
 }
 
-def dibujar_botones(pantalla, fuente, colores):
-    # Usamos la variable global botones directamente
+def dibujar_botones(pantalla, fuente, colores): # Usamos la variable global botones directamente
     for texto, rect in botones.items():
         pg.draw.rect(pantalla, colores["CELESTE"], rect)
         pg.draw.rect(pantalla, colores["NEGRO"], rect, 2)
@@ -32,7 +31,7 @@ def menu_principal(pantalla, fondo, fuente, colores, titulo):
     nivel = None
     corriendo = True
     musica_pausada = False
-    mixer.music.load("II-Parcial-Programacion-UTN-/Publico/recursos/Musica_Menu.mp3") #Maquillar la musica
+    mixer.music.load("publico/musica/Musica_Menu.mp3") # Maquillar la musica
     mixer.music.play()
     mixer.music.set_volume(0.5)
     while corriendo:
