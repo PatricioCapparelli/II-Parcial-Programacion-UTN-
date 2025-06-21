@@ -1,5 +1,5 @@
 import random
-from funciones.inicializar_matriz import inicializar_matriz
+from funciones.recursos.inicializar_matriz import inicializar_matriz
 import pygame as pg
 
 longitud_submarino = 1

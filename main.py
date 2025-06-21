@@ -1,6 +1,6 @@
 import pygame as pg
 import pygame.mixer as mixer
-from funciones.modulos.pantalla import configurar_pantalla
+from funciones.pantallas.pantalla import configurar_pantalla
 from funciones.modulos.menu import menu_principal
 import pygame.mixer as mixer
 
