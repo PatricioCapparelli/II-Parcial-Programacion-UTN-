@@ -17,7 +17,7 @@ def mostrar_puntajes_json(pantalla, fuente, colores):
     pantalla.blit(fondo2, (0, 0))
 
     titulo_render = fuente.render("PUNTAJES", True, colores["NEGRO"])
-    pantalla.blit(titulo_render, (250, 60))  # Mostrar el titulo arriba
+    pantalla.blit(titulo_render, (300, 50)) 
 
     archivo = "puntajes.json"
     datos = []
@@ -25,10 +25,7 @@ def mostrar_puntajes_json(pantalla, fuente, colores):
         with open(archivo, "r", encoding="utf-8") as f:
             datos = json.load(f)
     datos_ordenados = sorted(datos, key=lambda x: x["puntaje"], reverse=True)
-    fondo2 = pg.image.load("publico/02.jpg")
-    pantalla.blit(fondo2, (0, 0))
-    titulo = fuente.render("PUNTAJES", True, colores["NEGRO"])
-    pantalla.blit(titulo, (300, 50))
+
     y = 120
     for entrada in datos_ordenados[:10]:
         texto = fuente.render(f"{entrada['nick']}: {entrada['puntaje']}", True, colores["NEGRO"])
@@ -38,7 +35,7 @@ def mostrar_puntajes_json(pantalla, fuente, colores):
     boton_volver = pg.Rect(300, y + 40, 200, 50) 
     pg.draw.rect(pantalla, colores["NEGRO"], boton_volver, width=2, border_radius=10)
     texto_volver = fuente.render("VOLVER", True, colores["NEGRO"])
-    text_rect = texto_volver.get_rect(center=boton_volver.center) # Centrar texto dentro del boton
+    text_rect = texto_volver.get_rect(center=boton_volver.center) 
     pantalla.blit(texto_volver, text_rect)
 
     pg.display.flip()
@@ -51,3 +48,4 @@ def mostrar_puntajes_json(pantalla, fuente, colores):
             elif evento.type == pg.MOUSEBUTTONDOWN and evento.button == 1:
                 if boton_volver.collidepoint(evento.pos):
                     esperando = False
+

@@ -1,5 +1,5 @@
 import pygame as pg
-from funciones.elegir_nivel import pantalla_dificultad
+from funciones.pantallas.pantalla_nivel import pantalla_dificultad
 from funciones.modulos.juego import jugar
 from funciones.modulos.puntajes import mostrar_puntajes_json
 import pygame.mixer as mixer
@@ -17,9 +17,9 @@ botones = {
 
 def dibujar_botones(pantalla, fuente, colores): # Usamos la variable global botones directamente
     for texto, rect in botones.items():
-        pg.draw.rect(pantalla, colores["CELESTE"], rect)
-        pg.draw.rect(pantalla, colores["NEGRO"], rect, 2)
-        texto_render = fuente.render(texto, True, colores["NEGRO"])
+        pg.draw.rect(pantalla, colores["celeste"], rect)
+        pg.draw.rect(pantalla, colores["negro"], rect, 2)
+        texto_render = fuente.render(texto, True, colores["negro"])
         pantalla.blit(
             texto_render,
             (rect.x + (rect.width - texto_render.get_width()) // 2,
@@ -31,7 +31,7 @@ def menu_principal(pantalla, fondo, fuente, colores, titulo):
     nivel = None
     corriendo = True
     musica_pausada = False
-    mixer.music.load("publico/musica/Musica_Menu.mp3") # Maquillar la musica
+    mixer.music.load("publico/musica/Musica_Menu.mp3") 
     mixer.music.play()
     mixer.music.set_volume(0.5)
     while corriendo:

@@ -1,5 +1,5 @@
 import random
-from funciones.inicializar_matriz import inicializar_matriz
+from funciones.recursos.inicializar_matriz import inicializar_matriz
 import pygame as pg
 
 longitud_submarino = 1
@@ -88,7 +88,7 @@ def mostrar_tablero(pantalla, matriz):
     celda_ancho = 10
     celda_alto = 10
     margen = 2
-    fondo = pg.image.load("II-Parcial-Programacion-UTN-/Publico/recursos/02.jpg")
+    fondo = pg.image.load("publico/02.jpg")
     pantalla.blit(fondo, (0, 0))
 
     for fila in range (len(matriz)):

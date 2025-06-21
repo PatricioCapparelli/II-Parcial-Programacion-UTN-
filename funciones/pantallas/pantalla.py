@@ -12,11 +12,15 @@ def configurar_pantalla():
     fuente = pg.font.SysFont("CASTELLAR", 30)
 
     colores = {
-    "BLANCO": (255, 255, 255),
-    "AZUL": (0, 102, 204),
-    "GRIS": (200, 200, 200),
-    "NEGRO": (0, 0, 0),
-    "CELESTE":(135,206,235),
-    "color_con_alpha": (0, 0, 0, 0)
-}    
+    "blanco": (255, 255, 255),
+    "azul": (0, 102, 204),
+    "gris": (200, 200, 200),
+    "gris_oscuro": (100, 100, 100),
+    "verde": (0, 255, 0),
+    "rojo": (255, 0, 0),
+    "celeste": (135, 206, 235),
+    "negro": (0, 0, 0),
+    "transparente": (0, 0, 0, 0)
+    }
+
     return pantalla, fondo, fuente, colores, titulo
