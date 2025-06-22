@@ -51,7 +51,7 @@ def menu_principal(pantalla, fondo, fuente, colores, titulo):
                                 print(f"Nivel seleccionado: {dificultad_seleccionada}")
                         elif texto == "JUGAR" and dificultad_seleccionada != None:
                             jugar(pantalla, fuente, colores, dificultad_seleccionada)
-                            mostrar_tablero(pantalla, crear_tablero_inicial(dificultad_seleccionada))
+                            mostrar_tablero(pantalla, dificultad_seleccionada, crear_tablero_inicial(dificultad_seleccionada))
                         elif texto == "MUSICA":
                             if musica_pausada:
                                 mixer.music.unpause()
