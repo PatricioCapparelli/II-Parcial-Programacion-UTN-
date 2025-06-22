@@ -94,11 +94,7 @@ def mostrar_tablero(pantalla, matriz):
 
     for fila in range (len(matriz)):
         for col in range (len(matriz[fila])):
-            valor=matriz[fila][col]
-            if valor == 0:
-                color = (0, 0, 255)
-            else:
-                color = (255, 0, 0)
+            color = (0, 0, 255)
             x=col*(celda_ancho + margen)
             y=fila * (celda_alto +margen)
             pg.draw.rect(pantalla, color, (x, y, celda_ancho, celda_alto))
