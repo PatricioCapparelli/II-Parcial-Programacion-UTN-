@@ -31,7 +31,7 @@ def menu_principal(pantalla, fondo, fuente, colores, titulo):
     nivel = None
     corriendo = True
     musica_pausada = False
-    mixer.music.load("publico/musica/Musica_Menu.mp3") 
+    mixer.music.load("II-Parcial-Programacion-UTN-/Publico/musica/Musica_Menu.mp3") # Maquillar la musica
     mixer.music.play()
     mixer.music.set_volume(0.5)
     while corriendo:
@@ -48,10 +48,10 @@ def menu_principal(pantalla, fondo, fuente, colores, titulo):
                             nivel = pantalla_dificultad(pantalla, fuente, colores)
                             if nivel != None:
                                 dificultad_seleccionada = nivel  # guardar el nuevo nivel
-                                print("Nivel seleccionado:", dificultad_seleccionada)
+                                print(f"Nivel seleccionado: {dificultad_seleccionada}")
                         elif texto == "JUGAR" and dificultad_seleccionada != None:
                             jugar(pantalla, fuente, colores, dificultad_seleccionada)
-                            print("JUGAR")
+                            mostrar_tablero(pantalla, dificultad_seleccionada, crear_tablero_inicial(dificultad_seleccionada))
                         elif texto == "MUSICA":
                             if musica_pausada:
                                 mixer.music.unpause()

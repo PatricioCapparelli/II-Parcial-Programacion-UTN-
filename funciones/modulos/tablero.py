@@ -84,20 +84,17 @@ def crear_tablero_inicial(nivel: str) -> list:
     colocar_naves(matriz, acorazados, longitud_acorazado)
 
     return matriz
+
 def mostrar_tablero(pantalla, matriz):
     celda_ancho = 10
     celda_alto = 10
-    margen = 2
-    fondo = pg.image.load("publico/02.jpg")
+    margen = 1
+    fondo = pg.image.load("II-Parcial-Programacion-UTN-/Publico/imagenes/02.jpg")
     pantalla.blit(fondo, (0, 0))
 
     for fila in range (len(matriz)):
         for col in range (len(matriz[fila])):
-            valor=matriz[fila][col]
-            if valor == 0:
-                color = (0, 0, 255)
-            else:
-                color = (255, 0, 0)
+            color = (0, 0, 255)
             x=col*(celda_ancho + margen)
             y=fila * (celda_alto +margen)
             pg.draw.rect(pantalla, color, (x, y, celda_ancho, celda_alto))
