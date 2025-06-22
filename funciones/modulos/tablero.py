@@ -7,7 +7,6 @@ longitud_destructor = 2
 longitud_crucero = 3
 longitud_acorazado = 4
 
-
 def colocar_naves(matriz: list, cantidad: int, tamaño: int) -> None:
     """Coloca las naves en la matriz sin superposicion."""
     filas = len(matriz)

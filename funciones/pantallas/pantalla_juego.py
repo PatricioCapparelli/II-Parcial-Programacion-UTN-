@@ -1,13 +1,25 @@
 import pygame as pg
 from funciones.modulos.verificar_nave_hundida import verificar_nave_hundida
 
-def pantalla_juego(pantalla, fuente, colores, matriz):
-    # Configuración de dimensiones
-    tam_casillero = 30
-    margen = 2
-    tablero_x = 50
-    tablero_y = 100
-    
+def pantalla_juego(pantalla, fuente, colores, matriz, dificultad):
+    # Configuracion de dimensiones
+    match dificultad:
+        case "facil":
+            tam_casillero = 30
+            margen = 2
+            tablero_x = 50
+            tablero_y = 100
+        case "medio":
+            tam_casillero = 20
+            margen = 1
+            tablero_x = 30
+            tablero_y = 80
+        case "dificil":
+            tam_casillero = 10
+            margen = 1
+            tablero_x = 20
+            tablero_y = 60
+
     # Botones
     boton_reiniciar = pg.Rect(550, 100, 210, 50)
     boton_volver = pg.Rect(550, 300, 210, 50)
@@ -30,6 +42,7 @@ def pantalla_juego(pantalla, fuente, colores, matriz):
                 valor = matriz[fila][col]
                 x = tablero_x + col * (tam_casillero + margen)
                 y = tablero_y + fila * (tam_casillero + margen)
+
 
                 # Determinar color según el estado de la celda
                 if [fila, col] in disparos_realizados:
