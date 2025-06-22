@@ -84,10 +84,11 @@ def crear_tablero_inicial(nivel: str) -> list:
     colocar_naves(matriz, acorazados, longitud_acorazado)
 
     return matriz
+
 def mostrar_tablero(pantalla, matriz):
-    celda_ancho = 50
-    celda_alto = 50
-    margen = 5
+    celda_ancho = 10
+    celda_alto = 10
+    margen = 1
     fondo = pg.image.load("II-Parcial-Programacion-UTN-/Publico/imagenes/02.jpg")
     pantalla.blit(fondo, (0, 0))
 

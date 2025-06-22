@@ -4,7 +4,8 @@ tam_casillero = 30
 margen = 2
 tablero_x = 50
 tablero_y = 100
-boton_reiniciar = pg.Rect(650, 100, 150, 50)
+boton_reiniciar = pg.Rect(550, 100, 210, 50)
+#boton_salir = pg.Rect(550, 300, 210, 50)
 
 def pantalla_juego(pantalla, fuente, colores, matriz):
     puntaje = 0
@@ -39,10 +40,17 @@ def pantalla_juego(pantalla, fuente, colores, matriz):
             texto_reiniciar,
             (boton_reiniciar.x + 20, boton_reiniciar.y + 10)
         )
+        #Salir
+        boton_volver = pg.Rect(550, 300, 210, 50) 
+        pg.draw.rect(pantalla, colores["negro"], boton_volver, width=2, border_radius=10)
+        texto_volver = fuente.render("VOLVER", True, colores["negro"])
+        text_rect = texto_volver.get_rect(center=boton_volver.center) 
+        pantalla.blit(texto_volver, text_rect)
+
 
         # Puntaje
         texto_puntaje = fuente.render(f"puntaje: {puntaje:04}", True, colores["negro"])
-        pantalla.blit(texto_puntaje, (650, 200))
+        pantalla.blit(texto_puntaje, (550, 200))
 
         for evento in pg.event.get():
             if evento.type == pg.QUIT:
