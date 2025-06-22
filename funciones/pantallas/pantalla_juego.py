@@ -2,27 +2,25 @@ import pygame as pg
 from funciones.modulos.verificar_nave_hundida import verificar_nave_hundida
 
 def pantalla_juego(pantalla, fuente, colores, matriz, dificultad):
-    # Configuracion de dimensiones
+    # Configuración de dimensiones
+    margen = 2
     match dificultad:
         case "facil":
             tam_casillero = 30
-            margen = 2
-            tablero_x = 50
+            tablero_x = 120
             tablero_y = 100
         case "medio":
             tam_casillero = 20
-            margen = 1
-            tablero_x = 30
-            tablero_y = 80
+            tablero_x = 50
+            tablero_y = 90
         case "dificil":
             tam_casillero = 10
-            margen = 1
-            tablero_x = 20
+            tablero_x = 35
             tablero_y = 60
-
+    
     # Botones
-    boton_reiniciar = pg.Rect(550, 100, 210, 50)
-    boton_volver = pg.Rect(550, 300, 210, 50)
+    boton_reiniciar = pg.Rect(545, 100, 210, 50)
+    boton_volver = pg.Rect(545, 300, 210, 50)
     
     # Estado del juego
     naves_hundidas = []
@@ -34,7 +32,8 @@ def pantalla_juego(pantalla, fuente, colores, matriz, dificultad):
     mostrar_naves = False  # Modo debug para ver naves
 
     while corriendo:
-        pantalla.fill(colores["gris"])
+        fondo2 = pg.image.load("publico/imagenes/02.jpg")
+        pantalla.blit(fondo2, (0, 0))
 
         # Dibujar tablero
         for fila in range(len(matriz)):
@@ -77,13 +76,13 @@ def pantalla_juego(pantalla, fuente, colores, matriz, dificultad):
         pantalla.blit(texto_volver, (boton_volver.x + 20, boton_volver.y + 10))
 
         # Mostrar puntaje
-        texto_puntaje = fuente.render(f"Puntaje: {puntaje:04}", True, colores["negro"])
-        pantalla.blit(texto_puntaje, (550, 200))
+        texto_puntaje = fuente.render(f"Puntaje:{puntaje:04}", True, colores["negro"])
+        pantalla.blit(texto_puntaje, (545, 200))
 
         # Mostrar estado del modo debug
         if mostrar_naves:
             texto_debug = fuente.render("MODO DEBUG: ACTIVADO", True, colores["rojo"])
-            pantalla.blit(texto_debug, (550, 250))
+            pantalla.blit(texto_debug, (545, 250))
 
         # Verificar si todas las naves han sido hundidas
         if not juego_terminado:
