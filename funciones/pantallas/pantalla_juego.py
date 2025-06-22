@@ -1,5 +1,5 @@
 import pygame as pg
-from funciones.modulos.verificar_nave_hundida import verificar_y_sumar_puntaje_extra
+from funciones.modulos.verificar_nave_hundida import verificar_nave_hundida
 
 def pantalla_juego(pantalla, fuente, colores, matriz):
     # Configuración de dimensiones
@@ -118,11 +118,11 @@ def pantalla_juego(pantalla, fuente, colores, matriz):
                             
                             # Verificar si se hundió una nave completa
                             nave_hundida, partes_hundidas = verificar_nave_hundida(matriz, fila, col)
-                            
-                            if nave_hundida:
-                                puntaje += 10 * len(partes_hundidas)  # Sumar 10 puntos por cada parte
-                                naves_hundidas.append(partes_hundidas)
 
+                            if nave_hundida and len(partes_hundidas) <= 4:
+                                puntaje += 10 * len(partes_hundidas)
+                                naves_hundidas.append(partes_hundidas)
+                            
                         elif matriz[fila][col] == 0:  # Disparo al agua
                             matriz[fila][col] = 3
                             puntaje -= 1  # Penalización por disparo fallado
@@ -132,37 +132,3 @@ def pantalla_juego(pantalla, fuente, colores, matriz):
     return resultado, puntaje
 
 
-def verificar_nave_hundida(matriz, fila, col):
-    """Verifica si el disparo hundió una nave completa"""
-    if matriz[fila][col] != 2:
-        return False, []
-
-    # Buscar todas las partes conectadas de la nave
-    partes_nave = []
-    por_visitar = [[fila, col]]
-    
-    while por_visitar:
-        actual = por_visitar.pop()
-        if actual in partes_nave:
-            continue
-            
-        partes_nave.append(actual)
-        f, c = actual
-        
-        # Explorar vecinos ortogonales
-        for df, dc in [[-1,0], [1,0], [0,-1], [0,1]]:
-            nueva_fila = f + df
-            nueva_col = c + dc
-            
-            if 0 <= nueva_fila < len(matriz) and (0 <= nueva_col < len(matriz[0])):
-                if matriz[nueva_fila][nueva_col] in [1, 2]:
-                    if [nueva_fila, nueva_col] not in partes_nave:
-                        por_visitar.append([nueva_fila, nueva_col])
-
-    # Verificar si todas las partes están impactadas
-    nave_hundida = all(matriz[p[0]][p[1]] == 2 for p in partes_nave)
-
-    # Ordenar las partes para comparación consistente
-    partes_nave.sort()
-    
-    return nave_hundida, partes_nave
