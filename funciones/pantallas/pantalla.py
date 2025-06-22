@@ -20,7 +20,8 @@ def configurar_pantalla():
     "rojo": (255, 0, 0),
     "celeste": (135, 206, 235),
     "negro": (0, 0, 0),
-    "transparente": (0, 0, 0, 0)
+    "transparente": (0, 0, 0, 0),
+    "naranja": (255, 165, 0)
     }
 
     return pantalla, fondo, fuente, colores, titulo

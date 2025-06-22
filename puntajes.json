@@ -12,23 +12,51 @@
         "puntaje": 123
     },
     {
-        "nick": "df",
+        "nick": "dfef",
+        "puntaje": 0
+    },
+    {
+        "nick": "dfef",
+        "puntaje": 0
+    },
+    {
+        "nick": "af",
+        "puntaje": 0
+    },
+    {
+        "nick": "defef",
+        "puntaje": 0
+    },
+    {
+        "nick": "defef",
+        "puntaje": 35
+    },
+    {
+        "nick": "ghrt",
         "puntaje": -2
     },
     {
-        "nick": "rg",
+        "nick": "ghrt",
+        "puntaje": -3
+    },
+    {
+        "nick": "wrger",
+        "puntaje": -1
+    },
+    {
+        "nick": "ferfr",
+        "puntaje": -1
+    },
+    {
+        "nick": "erg",
+        "puntaje": 17
+    },
+    {
+        "nick": "wefew",
         "puntaje": 0
     },
     {
-        "nick": "rtt",
-        "puntaje": 0
-    },
-    {
-        "nick": "h",
-        "puntaje": 11
-    },
-    {
-        "nick": "dsdf",
+        "nick": "ggg",
         "puntaje": 0
     }
 ]

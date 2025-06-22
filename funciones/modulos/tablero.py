@@ -85,17 +85,3 @@ def crear_tablero_inicial(nivel: str) -> list:
 
     return matriz
 
-def mostrar_tablero(pantalla, matriz):
-    celda_ancho = 10
-    celda_alto = 10
-    margen = 1
-    fondo = pg.image.load("II-Parcial-Programacion-UTN-/Publico/imagenes/02.jpg")
-    pantalla.blit(fondo, (0, 0))
-
-    for fila in range (len(matriz)):
-        for col in range (len(matriz[fila])):
-            color = (0, 0, 255)
-            x=col*(celda_ancho + margen)
-            y=fila * (celda_alto +margen)
-            pg.draw.rect(pantalla, color, (x, y, celda_ancho, celda_alto))
-    pg.display.flip()

@@ -8,14 +8,16 @@ def pedir_nick(pantalla, fuente, colores):
     activo = True
     while activo:
         for evento in pg.event.get():
-            if evento.type == pg.KEYDOWN:
+            if evento.type == pg.QUIT:
+                activo = False
+            elif evento.type == pg.KEYDOWN:
                 if evento.key == pg.K_RETURN and len(nick) > 0:
                     activo = False
                 elif evento.key == pg.K_BACKSPACE:
                     nick = nick[:-1]
-                else:
-                    if len(nick) < 10:
-                        nick += evento.unicode
+                elif len(nick) < 10:
+                    nick += evento.unicode
+
         pantalla.fill(colores["gris"])
         texto = fuente.render("Ingresa tu nick y presiona ENTER:", True, colores["negro"])
         pantalla.blit(texto, (50, 100))
@@ -25,14 +27,18 @@ def pedir_nick(pantalla, fuente, colores):
         texto_nick = fuente.render(nick, True, colores["negro"])
         pantalla.blit(texto_nick, (caja.x + 5, caja.y + 5))
         pg.display.flip()
+
     return nick
 
-def jugar(pantalla, fuente, colores, dificultad):
-    nick = pedir_nick(pantalla, fuente, colores)
+def jugar(pantalla, fuente, colores, dificultad, nick=None):
+    if nick == None:
+        nick = pedir_nick(pantalla, fuente, colores)
+
     matriz = crear_tablero_inicial(dificultad)
     resultado, puntaje = pantalla_juego(pantalla, fuente, colores, matriz)
 
     if resultado == "reiniciar":
-        jugar(pantalla, fuente, colores, dificultad)
+        return jugar(pantalla, fuente, colores, dificultad, nick)
     else:
         guardar_puntaje_json(nick, puntaje)
+        return nick  # nick actualizado
