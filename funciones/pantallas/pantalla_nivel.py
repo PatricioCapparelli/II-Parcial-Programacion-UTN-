@@ -30,9 +30,6 @@ def pantalla_dificultad(pantalla, fuente, colores) -> str:
         pantalla.blit(fuente.render("VOLVER", True, colores["negro"]), (rect_volver.x + 40, rect_volver.y + 10))
 
         for evento in pg.event.get():
-            if evento.type == pg.QUIT:
-                pg.quit()
-                exit()
             if evento.type == pg.MOUSEBUTTONDOWN and evento.button == 1:
                 if rect_facil.collidepoint(evento.pos):
                     dificultad = "FACIL"
