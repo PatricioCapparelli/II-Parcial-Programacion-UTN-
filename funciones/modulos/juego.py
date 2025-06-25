@@ -38,7 +38,9 @@ def jugar(pantalla, fuente, colores, dificultad, nick=None):
     resultado, puntaje = pantalla_juego(pantalla, fuente, colores, matriz, dificultad)
 
     if resultado == "reiniciar":
-        return jugar(pantalla, fuente, colores, dificultad, nick)
+        valor = jugar(pantalla, fuente, colores, dificultad, nick)
     else:
         guardar_puntaje_json(nick, puntaje)
-        return nick  # nick actualizado
+        valor = nick  # nick actualizado
+        
+    return valor

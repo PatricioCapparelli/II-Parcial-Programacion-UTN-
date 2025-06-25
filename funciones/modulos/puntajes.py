@@ -30,7 +30,7 @@ def mostrar_puntajes_json(pantalla, fuente, colores):
     titulo = fuente.render("PUNTAJES", True, colores["negro"])
     pantalla.blit(titulo, (300, 50))
     y = 120
-    for entrada in datos_ordenados[:10]:
+    for entrada in datos_ordenados[:3]: #slice
         texto = fuente.render(f"{entrada['nick']}: {entrada['puntaje']}", True, colores["negro"])
         pantalla.blit(texto, (250, y))
         y += 40

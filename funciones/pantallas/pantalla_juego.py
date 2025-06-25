@@ -1,15 +1,10 @@
-# ---------------------------------------------
-#  pantalla_juego.py
-# ---------------------------------------------
 import pygame as pg
 from funciones.modulos.verificar_nave_hundida import verificar_nave_hundida
 
-# (Opcional) Constantes para leer mejor el código
-AGUA            = 0
-NAVE_INTacta    = 1
-NAVE_IMPACTADA  = 2
-AGUA_ERRADA     = 3
-
+agua = 0
+nave_intacta = 1
+nave_impactada = 2
+agua_errada = 3
 
 def pantalla_juego(pantalla, fuente, colores, matriz, dificultad):
     margen = 2
@@ -46,7 +41,7 @@ def pantalla_juego(pantalla, fuente, colores, matriz, dificultad):
                 y = tablero_y + fila * (tam_casillero + margen)
 
                 if [fila, col] in disparos_realizados:          # Celda ya visitada
-                    if valor == NAVE_IMPACTADA:                 # Parte de nave dañada
+                    if valor == nave_impactada:                 # Parte de nave dañada
                         es_hundida = False
                         for nave in naves_hundidas:
                             if [fila, col] in nave:
@@ -56,7 +51,7 @@ def pantalla_juego(pantalla, fuente, colores, matriz, dificultad):
                     else:                                       # Agua o agua errada
                         color = colores["azul"]
                 else:                                           # Celda sin revelar
-                    if mostrar_naves and valor == NAVE_INTacta: # Mostrar naves (debug)
+                    if mostrar_naves and valor == nave_intacta: # Mostrar naves (debug)
                         color = colores["verde"]
                     else:
                         color = colores["celeste"]
@@ -82,16 +77,16 @@ def pantalla_juego(pantalla, fuente, colores, matriz, dificultad):
             pantalla.blit(fuente.render("MODO DEBUG: ACTIVADO",
                                         True, colores["rojo"]), (545, 250))
 
-        # --------------- ¿TODAS LAS NAVES HUNDIDAS? -----
+        # TODAS LAS NAVES HUNDIDAS?
         if juego_terminado is False:
-            if all(NAVE_INTacta not in fila for fila in matriz):
+            if all(nave_intacta not in fila for fila in matriz):
                 juego_terminado = True
                 mensaje = fuente.render("¡TODAS LAS NAVES HUNDIDAS!",
                                         True, colores["verde"])
                 pantalla.blit(mensaje, (pantalla.get_width() // 2
                                         - mensaje.get_width() // 2, 50))
 
-        # --------------- EVENTOS ------------------------
+        # EVENTOS
         for evento in pg.event.get():
             if evento.type == pg.QUIT:
                 corriendo = False
@@ -118,8 +113,8 @@ def pantalla_juego(pantalla, fuente, colores, matriz, dificultad):
 
                     disparos_realizados.append([fila, col])
 
-                    if matriz[fila][col] == NAVE_INTacta:        # Impacto
-                        matriz[fila][col] = NAVE_IMPACTADA
+                    if matriz[fila][col] == nave_intacta:        # Impacto
+                        matriz[fila][col] = nave_impactada
                         puntaje += 5
 
                         hundida, partes = verificar_nave_hundida(matriz, fila, col)
@@ -127,8 +122,8 @@ def pantalla_juego(pantalla, fuente, colores, matriz, dificultad):
                             puntaje += 10 * len(partes)
                             naves_hundidas.append(partes)
 
-                    elif matriz[fila][col] == AGUA:              # Agua
-                        matriz[fila][col] = AGUA_ERRADA
+                    elif matriz[fila][col] == agua:              # Agua
+                        matriz[fila][col] = agua_errada
                         puntaje -= 1
 
         pg.display.flip()
