@@ -1,146 +1,136 @@
+# ---------------------------------------------
+#  pantalla_juego.py
+# ---------------------------------------------
 import pygame as pg
 from funciones.modulos.verificar_nave_hundida import verificar_nave_hundida
 
+# (Opcional) Constantes para leer mejor el código
+AGUA            = 0
+NAVE_INTacta    = 1
+NAVE_IMPACTADA  = 2
+AGUA_ERRADA     = 3
+
+
 def pantalla_juego(pantalla, fuente, colores, matriz, dificultad):
-    # Configuración de dimensiones
     margen = 2
     match dificultad:
         case "facil":
             tam_casillero = 30
-            tablero_x = 120
-            tablero_y = 100
+            tablero_x, tablero_y = 120, 100
         case "medio":
             tam_casillero = 20
-            tablero_x = 50
-            tablero_y = 90
+            tablero_x, tablero_y = 50, 90
         case "dificil":
             tam_casillero = 10
-            tablero_x = 35
-            tablero_y = 60
-    
-    # Botones
+            tablero_x, tablero_y = 35, 60
+
     boton_reiniciar = pg.Rect(545, 100, 210, 50)
-    boton_volver = pg.Rect(545, 300, 210, 50)
-    
-    # Estado del juego
+    boton_volver    = pg.Rect(545, 300, 210, 50)
+
     naves_hundidas = []
     puntaje = 0
     disparos_realizados = []
     corriendo = True
     resultado = "finalizado"
     juego_terminado = False
-    mostrar_naves = False  # Modo debug para ver naves
+    mostrar_naves = False      # Modo debug
 
     while corriendo:
-        fondo2 = pg.image.load("publico/imagenes/02.jpg")
-        pantalla.blit(fondo2, (0, 0))
+        pantalla.blit(pg.image.load("publico/imagenes/02.jpg"), (0, 0))
 
-        # Dibujar tablero
+        # DIBUJAR TABLERO 
         for fila in range(len(matriz)):
             for col in range(len(matriz[0])):
                 valor = matriz[fila][col]
                 x = tablero_x + col * (tam_casillero + margen)
                 y = tablero_y + fila * (tam_casillero + margen)
 
-
-                # Determinar color según el estado de la celda
-                if [fila, col] in disparos_realizados:
-                    if valor == 0:  # Disparo al agua
-                        color = colores["azul_oscuro"]
-                    elif valor == 2:  # Nave impactada
-                        # Verificar si es parte de una nave hundida
+                if [fila, col] in disparos_realizados:          # Celda ya visitada
+                    if valor == NAVE_IMPACTADA:                 # Parte de nave dañada
                         es_hundida = False
                         for nave in naves_hundidas:
                             if [fila, col] in nave:
                                 es_hundida = True
                                 break
                         color = colores["rojo"] if es_hundida else colores["naranja"]
-                else:  # Celda no revelada
-                    if mostrar_naves and valor == 1:  # Mostrar naves en modo debug
+                    else:                                       # Agua o agua errada
+                        color = colores["azul"]
+                else:                                           # Celda sin revelar
+                    if mostrar_naves and valor == NAVE_INTacta: # Mostrar naves (debug)
                         color = colores["verde"]
                     else:
                         color = colores["celeste"]
 
                 pg.draw.rect(pantalla, color, (x, y, tam_casillero, tam_casillero))
-                pg.draw.rect(pantalla, colores["negro"], (x, y, tam_casillero, tam_casillero), 1)
+                pg.draw.rect(pantalla, colores["negro"],
+                            (x, y, tam_casillero, tam_casillero), 1)
 
-        # Dibujar botones
         pg.draw.rect(pantalla, colores["celeste"], boton_reiniciar)
-        pg.draw.rect(pantalla, colores["negro"], boton_reiniciar, 2)
-        texto_reiniciar = fuente.render("REINICIAR", True, colores["negro"])
-        pantalla.blit(texto_reiniciar, (boton_reiniciar.x + 20, boton_reiniciar.y + 10))
+        pg.draw.rect(pantalla, colores["negro"],   boton_reiniciar, 2)
+        pantalla.blit(fuente.render("REINICIAR", True, colores["negro"]),
+                    (boton_reiniciar.x + 20, boton_reiniciar.y + 10))
 
         pg.draw.rect(pantalla, colores["gris_oscuro"], boton_volver)
-        pg.draw.rect(pantalla, colores["negro"], boton_volver, 2)
-        texto_volver = fuente.render("VOLVER", True, colores["blanco"])
-        pantalla.blit(texto_volver, (boton_volver.x + 20, boton_volver.y + 10))
+        pg.draw.rect(pantalla, colores["negro"],       boton_volver, 2)
+        pantalla.blit(fuente.render("VOLVER", True, colores["blanco"]),
+                    (boton_volver.x + 20, boton_volver.y + 10))
 
-        # Mostrar puntaje
-        texto_puntaje = fuente.render(f"Puntaje:{puntaje:04}", True, colores["negro"])
-        pantalla.blit(texto_puntaje, (545, 200))
+        pantalla.blit(fuente.render(f"Puntaje:{puntaje:04}",
+                                    True, colores["negro"]), (545, 200))
 
-        # Mostrar estado del modo debug
         if mostrar_naves:
-            texto_debug = fuente.render("MODO DEBUG: ACTIVADO", True, colores["rojo"])
-            pantalla.blit(texto_debug, (545, 250))
+            pantalla.blit(fuente.render("MODO DEBUG: ACTIVADO",
+                                        True, colores["rojo"]), (545, 250))
 
-        # Verificar si todas las naves han sido hundidas
-        if not juego_terminado:
-            todas_hundidas = True
-            for fila in matriz:
-                if 1 in fila:
-                    todas_hundidas = False
-                    break
-            
-            if todas_hundidas:
+        # --------------- ¿TODAS LAS NAVES HUNDIDAS? -----
+        if juego_terminado is False:
+            if all(NAVE_INTacta not in fila for fila in matriz):
                 juego_terminado = True
-                mensaje = fuente.render("¡TODAS LAS NAVES HUNDIDAS!", True, colores["verde"])
-                pantalla.blit(mensaje, (pantalla.get_width() // 2 - mensaje.get_width() // 2, 50))
+                mensaje = fuente.render("¡TODAS LAS NAVES HUNDIDAS!",
+                                        True, colores["verde"])
+                pantalla.blit(mensaje, (pantalla.get_width() // 2
+                                        - mensaje.get_width() // 2, 50))
 
+        # --------------- EVENTOS ------------------------
         for evento in pg.event.get():
             if evento.type == pg.QUIT:
                 corriendo = False
 
-            elif evento.type == pg.KEYDOWN:
-                if evento.key == pg.K_d:  # Presionar 'D' para alternar modo debug
-                    mostrar_naves = not mostrar_naves
+            elif evento.type == pg.KEYDOWN and evento.key == pg.K_d:
+                mostrar_naves = not mostrar_naves
 
             elif evento.type == pg.MOUSEBUTTONDOWN and evento.button == 1:
-                mouse_x, mouse_y = evento.pos
-
+                # Botones
                 if boton_reiniciar.collidepoint(evento.pos):
-                    resultado = "reiniciar"
-                    corriendo = False
+                    resultado, corriendo = "reiniciar", False
+                    continue
+                if boton_volver.collidepoint(evento.pos):
+                    resultado, corriendo = "volver", False
+                    continue
 
-                elif boton_volver.collidepoint(evento.pos):
-                    resultado = "volver"
-                    corriendo = False
+                # Disparo
+                col = (evento.pos[0] - tablero_x) // (tam_casillero + margen)
+                fila = (evento.pos[1] - tablero_y) // (tam_casillero + margen)
+                if (0 <= fila < len(matriz)
+                        and 0 <= col < len(matriz[0])
+                        and juego_terminado is False
+                        and [fila, col] not in disparos_realizados):
 
-                # Verificar disparo en el tablero
-                col = (mouse_x - tablero_x) // (tam_casillero + margen)
-                fila = (mouse_y - tablero_y) // (tam_casillero + margen)
+                    disparos_realizados.append([fila, col])
 
-                if 0 <= fila < len(matriz) and (0 <= col < len(matriz[0])) and not juego_terminado:
-                    if [fila, col] not in disparos_realizados:
-                        disparos_realizados.append([fila, col])
+                    if matriz[fila][col] == NAVE_INTacta:        # Impacto
+                        matriz[fila][col] = NAVE_IMPACTADA
+                        puntaje += 5
 
-                        if matriz[fila][col] == 1:  # Impacto en nave
-                            matriz[fila][col] = 2  # Marcar como impactado
-                            puntaje += 5  # Sumar 5 puntos por impacto
-                            
-                            # Verificar si se hundió una nave completa
-                            nave_hundida, partes_hundidas = verificar_nave_hundida(matriz, fila, col)
+                        hundida, partes = verificar_nave_hundida(matriz, fila, col)
+                        if hundida:
+                            puntaje += 10 * len(partes)
+                            naves_hundidas.append(partes)
 
-                            if nave_hundida and len(partes_hundidas) <= 4:
-                                puntaje += 10 * len(partes_hundidas)
-                                naves_hundidas.append(partes_hundidas)
-                            
-                        elif matriz[fila][col] == 0:  # Disparo al agua
-                            matriz[fila][col] = 3
-                            puntaje -= 1  # Penalización por disparo fallado
+                    elif matriz[fila][col] == AGUA:              # Agua
+                        matriz[fila][col] = AGUA_ERRADA
+                        puntaje -= 1
 
         pg.display.flip()
 
     return resultado, puntaje
-
-

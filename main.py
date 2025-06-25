@@ -11,4 +11,4 @@ pantalla, fondo, fuente, colores, titulo = configurar_pantalla()
 
 menu_principal(pantalla, fondo, fuente, colores, titulo)
 
-pg.quit()
+pg.quit() ## arreglar que no se peguen las naves

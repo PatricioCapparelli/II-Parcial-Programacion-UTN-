@@ -7,45 +7,39 @@ longitud_destructor = 2
 longitud_crucero = 3
 longitud_acorazado = 4
 
-def colocar_naves(matriz: list, cantidad: int, tamaño: int) -> None:
-    """Coloca las naves en la matriz sin superposicion."""
-    filas = len(matriz)
-    columnas = len(matriz[0])
+def celda_valida(matriz, f, c):
+    """Devuelve True si (f,c) y sus 8 vecinos están vacíos (0)."""
+    filas, columnas = len(matriz), len(matriz[0])
+    for i in range(f-1, f+2):
+        for j in range(c-1, c+2):
+            if 0 <= i < filas and 0 <= j < columnas and matriz[i][j] != 0:
+                return False
+    return True
+
+
+def colocar_naves(matriz, cantidad, tamaño):
+    """Coloca `cantidad` barcos de `tamaño` sin superponerse ni tocarse."""
+    filas, columnas = len(matriz), len(matriz[0])
     colocadas = 0
 
     while colocadas < cantidad:
-        orientacion = random.choice(['H', 'V'])
+        horiz = random.choice([True, False])
 
-        if orientacion == 'H':
-            fila = random.randint(0, filas - 1) # 0 a 9
-            col = random.randint(0, columnas - tamaño) 
-            libre = True
-            i = 0
-            while i < tamaño:
-                if matriz[fila][col + i] != 0: # verifica si esta libre la posicion
-                    libre = False
-                i += 1
-            if libre: # si esta libre la posicion, pone el barco
-                j = 0
-                while j < tamaño:
-                    matriz[fila][col + j] = 1
-                    j += 1
-                colocadas += 1
-
-        else:  # Vertical
-            fila = random.randint(0, filas - tamaño)
-            col = random.randint(0, columnas - 1)
-            libre = True
-            i = 0
-            while i < tamaño:
-                if matriz[fila + i][col] != 0:
-                    libre = False
-                i += 1
+        if horiz:                              # Horizontal
+            f = random.randint(0, filas - 1)
+            c = random.randint(0, columnas - tamaño)
+            libre = all(celda_valida(matriz, f, c+i) for i in range(tamaño))
             if libre:
-                j = 0
-                while j < tamaño:
-                    matriz[fila + j][col] = 1
-                    j += 1
+                for i in range(tamaño):
+                    matriz[f][c+i] = 1
+                colocadas += 1
+        else:                                  # Vertical
+            f = random.randint(0, filas - tamaño)
+            c = random.randint(0, columnas - 1)
+            libre = all(celda_valida(matriz, f+i, c) for i in range(tamaño))
+            if libre:
+                for i in range(tamaño):
+                    matriz[f+i][c] = 1
                 colocadas += 1
 
 def crear_tablero_inicial(nivel: str) -> list:
@@ -73,7 +67,7 @@ def crear_tablero_inicial(nivel: str) -> list:
         acorazados = 3
     else:
         print("nivel invalido")
-        crear_tablero_inicial(input("Ingrese un nivel valido:"))
+        crear_tablero_inicial()
 
     matriz = inicializar_matriz(filas, columnas, 0)
 
