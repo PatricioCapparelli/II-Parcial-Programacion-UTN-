@@ -3,15 +3,21 @@ import pygame.mixer as mixer
 
 mixer.init()
 
-def configurar_pantalla():
-    pantalla = pg.display.set_mode((800, 600))
-    pg.display.set_caption("Batalla Naval - Menu Inicial")
-    fondo = pg.image.load("publico/imagenes/03.jpg")
-    titulo = pg.image.load("publico/imagenes/05.png")
-    titulo = pg.transform.scale(titulo,(800,140))
-    fuente = pg.font.SysFont("CASTELLAR", 30)
+botones = {
+    "NIVEL": pg.Rect(300, 200, 200, 50),
+    "JUGAR": pg.Rect(300, 270, 200, 50),
+    "PUNTAJES": pg.Rect(300, 340, 200, 50),
+    "MUSICA": pg.Rect(300, 410, 200, 50),
+    "SALIR": pg.Rect(300, 480, 200, 50),
+    "REINICIAR": pg.Rect(545, 100, 210, 50),
+    "VOLVER": pg.Rect(545, 300, 210, 50),
+    "VOLVER_NIVEL": pg.Rect(300, 420, 200, 50),
+    "FACIL": pg.Rect(300, 180, 200, 50),
+    "MEDIO": pg.Rect(300, 260, 200, 50),
+    "DIFICIL": pg.Rect(300, 340, 200, 50)
+}
 
-    colores = {
+colores = {
     "blanco": (255, 255, 255),
     "azul": (0, 102, 204),
     "gris": (200, 200, 200),
@@ -24,4 +30,12 @@ def configurar_pantalla():
     "naranja": (255, 165, 0)
     }
 
-    return pantalla, fondo, fuente, colores, titulo
+def configurar_pantalla():
+    pantalla = pg.display.set_mode((800, 600))
+    pg.display.set_caption("Batalla Naval - Menu Inicial")
+    fondo = pg.image.load("publico/imagenes/03.jpg")
+    titulo = pg.image.load("publico/imagenes/05.png")
+    titulo = pg.transform.scale(titulo,(800,140))
+    fuente = pg.font.SysFont("CASTELLAR", 30)
+
+    return pantalla, fondo, fuente, titulo

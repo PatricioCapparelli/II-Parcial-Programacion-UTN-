@@ -65,9 +65,6 @@ def crear_tablero_inicial(nivel: str) -> list:
         destructores = 9
         cruceros = 6
         acorazados = 3
-    else:
-        print("nivel invalido")
-        crear_tablero_inicial()
 
     matriz = inicializar_matriz(filas, columnas, 0)
 

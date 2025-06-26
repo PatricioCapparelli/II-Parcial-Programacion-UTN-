@@ -1,13 +1,14 @@
 import pygame as pg
 from funciones.modulos.verificar_nave_hundida import verificar_nave_hundida
+from funciones.recursos.botones import dibujar_botones
 
 agua = 0
 nave_intacta = 1
 nave_impactada = 2
 agua_errada = 3
 
-def pantalla_juego(pantalla, fuente, colores, matriz, dificultad):
-    margen = 2
+def pantalla_juego(pantalla, fuente, colores, matriz, dificultad, botones):
+    
     match dificultad:
         case "facil":
             tam_casillero = 30
@@ -18,10 +19,8 @@ def pantalla_juego(pantalla, fuente, colores, matriz, dificultad):
         case "dificil":
             tam_casillero = 10
             tablero_x, tablero_y = 35, 60
-
-    boton_reiniciar = pg.Rect(545, 100, 210, 50)
-    boton_volver    = pg.Rect(545, 300, 210, 50)
-
+            
+    margen = 2
     naves_hundidas = []
     puntaje = 0
     disparos_realizados = []
@@ -48,9 +47,9 @@ def pantalla_juego(pantalla, fuente, colores, matriz, dificultad):
                                 es_hundida = True
                                 break
                         color = colores["rojo"] if es_hundida else colores["naranja"]
-                    else:                                       # Agua o agua errada
-                        color = colores["azul"]
-                else:                                           # Celda sin revelar
+                    else:                                       
+                        color = colores["azul"] # Agua o agua errada
+                else:        # Celda sin revelar
                     if mostrar_naves and valor == nave_intacta: # Mostrar naves (debug)
                         color = colores["verde"]
                     else:
@@ -60,15 +59,8 @@ def pantalla_juego(pantalla, fuente, colores, matriz, dificultad):
                 pg.draw.rect(pantalla, colores["negro"],
                             (x, y, tam_casillero, tam_casillero), 1)
 
-        pg.draw.rect(pantalla, colores["celeste"], boton_reiniciar)
-        pg.draw.rect(pantalla, colores["negro"],   boton_reiniciar, 2)
-        pantalla.blit(fuente.render("REINICIAR", True, colores["negro"]),
-                    (boton_reiniciar.x + 20, boton_reiniciar.y + 10))
-
-        pg.draw.rect(pantalla, colores["gris_oscuro"], boton_volver)
-        pg.draw.rect(pantalla, colores["negro"],       boton_volver, 2)
-        pantalla.blit(fuente.render("VOLVER", True, colores["blanco"]),
-                    (boton_volver.x + 20, boton_volver.y + 10))
+        dibujar_botones(pantalla, fuente, colores, botones["REINICIAR"], "REINICIAR")
+        dibujar_botones(pantalla, fuente, colores, botones["VOLVER"], "VOLVER")
 
         pantalla.blit(fuente.render(f"Puntaje:{puntaje:04}",
                                     True, colores["negro"]), (545, 200))
@@ -76,55 +68,53 @@ def pantalla_juego(pantalla, fuente, colores, matriz, dificultad):
         if mostrar_naves:
             pantalla.blit(fuente.render("MODO DEBUG: ACTIVADO",
                                         True, colores["rojo"]), (545, 250))
+            
+        print(sum(fila.count(nave_intacta) for fila in matriz))
 
         # TODAS LAS NAVES HUNDIDAS?
-        if juego_terminado is False:
-            if all(nave_intacta not in fila for fila in matriz):
+        if juego_terminado == False:
+            if sum(fila.count(nave_intacta) for fila in matriz) == 0:
                 juego_terminado = True
-                mensaje = fuente.render("¡TODAS LAS NAVES HUNDIDAS!",
-                                        True, colores["verde"])
-                pantalla.blit(mensaje, (pantalla.get_width() // 2
-                                        - mensaje.get_width() // 2, 50))
-
+                
+            
         # EVENTOS
         for evento in pg.event.get():
-            if evento.type == pg.QUIT:
-                corriendo = False
-
-            elif evento.type == pg.KEYDOWN and evento.key == pg.K_d:
+            if evento.type == pg.KEYDOWN and evento.key == pg.K_d:
                 mostrar_naves = not mostrar_naves
 
             elif evento.type == pg.MOUSEBUTTONDOWN and evento.button == 1:
                 # Botones
-                if boton_reiniciar.collidepoint(evento.pos):
-                    resultado, corriendo = "reiniciar", False
-                    continue
-                if boton_volver.collidepoint(evento.pos):
-                    resultado, corriendo = "volver", False
-                    continue
+                for texto, rect in botones.items(): # TEXTO == KEY // RECT == VALUE
+                    if rect.collidepoint(evento.pos):
+                        if texto == "REINICIAR":
+                            resultado  = "reiniciar"
+                            corriendo = False
+                        elif texto == "VOLVER":
+                            resultado  = "volver"
+                            corriendo = False
 
-                # Disparo
-                col = (evento.pos[0] - tablero_x) // (tam_casillero + margen)
-                fila = (evento.pos[1] - tablero_y) // (tam_casillero + margen)
-                if (0 <= fila < len(matriz)
-                        and 0 <= col < len(matriz[0])
-                        and juego_terminado is False
-                        and [fila, col] not in disparos_realizados):
+                    # Disparo
+                    col = (evento.pos[0] - tablero_x) // (tam_casillero + margen)
+                    fila = (evento.pos[1] - tablero_y) // (tam_casillero + margen)
+                    if (0 <= fila < len(matriz)
+                            and 0 <= col < len(matriz[0])
+                            and juego_terminado == False
+                            and [fila, col] not in disparos_realizados):
 
-                    disparos_realizados.append([fila, col])
+                        disparos_realizados.append([fila, col])
 
-                    if matriz[fila][col] == nave_intacta:        # Impacto
-                        matriz[fila][col] = nave_impactada
-                        puntaje += 5
+                        if matriz[fila][col] == nave_intacta:        # Impacto
+                            matriz[fila][col] = nave_impactada
+                            puntaje += 5
 
-                        hundida, partes = verificar_nave_hundida(matriz, fila, col)
-                        if hundida:
-                            puntaje += 10 * len(partes)
-                            naves_hundidas.append(partes)
+                            hundida, partes = verificar_nave_hundida(matriz, fila, col)
+                            if hundida:
+                                puntaje += 10 * len(partes)
+                                naves_hundidas.append(partes)
 
-                    elif matriz[fila][col] == agua:              # Agua
-                        matriz[fila][col] = agua_errada
-                        puntaje -= 1
+                        elif matriz[fila][col] == agua:              # Agua 3
+                            matriz[fila][col] = agua_errada
+                            puntaje -= 1
 
         pg.display.flip()
 

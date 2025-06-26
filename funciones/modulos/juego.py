@@ -2,15 +2,14 @@ import pygame as pg
 from funciones.modulos.puntajes import guardar_puntaje_json
 from funciones.modulos.tablero import crear_tablero_inicial
 from funciones.pantallas.pantalla_juego import pantalla_juego
+from funciones.pantallas.pantalla import *
 
 def pedir_nick(pantalla, fuente, colores):
     nick = ""
     activo = True
     while activo:
         for evento in pg.event.get():
-            if evento.type == pg.QUIT:
-                activo = False
-            elif evento.type == pg.KEYDOWN:
+            if evento.type == pg.KEYDOWN:
                 if evento.key == pg.K_RETURN and len(nick) > 0:
                     activo = False
                 elif evento.key == pg.K_BACKSPACE:
@@ -27,7 +26,6 @@ def pedir_nick(pantalla, fuente, colores):
         texto_nick = fuente.render(nick, True, colores["negro"])
         pantalla.blit(texto_nick, (caja.x + 5, caja.y + 5))
         pg.display.flip()
-
     return nick
 
 def jugar(pantalla, fuente, colores, dificultad, nick=None):
@@ -35,7 +33,7 @@ def jugar(pantalla, fuente, colores, dificultad, nick=None):
         nick = pedir_nick(pantalla, fuente, colores)
 
     matriz = crear_tablero_inicial(dificultad)
-    resultado, puntaje = pantalla_juego(pantalla, fuente, colores, matriz, dificultad)
+    resultado, puntaje = pantalla_juego(pantalla, fuente, colores, matriz, dificultad, botones)
 
     if resultado == "reiniciar":
         valor = jugar(pantalla, fuente, colores, dificultad, nick)
