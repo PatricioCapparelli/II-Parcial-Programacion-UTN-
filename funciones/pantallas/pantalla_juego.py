@@ -1,6 +1,9 @@
 import pygame as pg
 from funciones.modulos.verificar_nave_hundida import verificar_nave_hundida
 from funciones.recursos.botones import dibujar_botones
+from funciones.pantallas.pantalla_juego_terminado import pantalla_victoria
+from funciones.recursos.dificultad import devolver_dificultad
+from funciones.recursos.botones import botones_juego
 import pygame.mixer as mixer
 mixer.init()
 
@@ -11,17 +14,7 @@ agua_errada = 3
 
 def pantalla_juego(pantalla, fuente, colores, matriz, dificultad, botones):
     
-    match dificultad:
-        case "facil":
-            tam_casillero = 30
-            tablero_x, tablero_y = 120, 100
-        case "medio":
-            tam_casillero = 20
-            tablero_x, tablero_y = 50, 90
-        case "dificil":
-            tam_casillero = 10
-            tablero_x, tablero_y = 35, 60
-            
+    tam_casillero, tablero_x, tablero_y = devolver_dificultad(dificultad)
     margen = 2
     naves_hundidas = []
     puntaje = 0
@@ -30,10 +23,7 @@ def pantalla_juego(pantalla, fuente, colores, matriz, dificultad, botones):
     resultado = "finalizado"
     juego_terminado = False
     mostrar_naves = False      # Modo debug
-    musica_victoria_iniciada = False
-    fondo_victoria_cargado = False
 
-    
     while corriendo:
         pantalla.blit(pg.image.load("publico/imagenes/02.jpg"), (0, 0))
 
@@ -74,15 +64,15 @@ def pantalla_juego(pantalla, fuente, colores, matriz, dificultad, botones):
                                     True, colores["negro"]), (545, 200))
 
         if mostrar_naves:
-            pantalla.blit(fuente.render("MODO DEBUG: ACTIVADO",
-                                        True, colores["rojo"]), (545, 250))
+            pantalla.blit(fuente.render("MODO DEBUG: ACTIVADO", True, colores["rojo"]), (545, 250))
             
-        #print(sum(fila.count(nave_intacta) for fila in matriz))
-
         # TODAS LAS NAVES HUNDIDAS?
         if juego_terminado == False:
             if sum(fila.count(nave_intacta) for fila in matriz) == 0:
                 juego_terminado = True
+                mixer.music.load("publico/musica/Musica_victoria.mp3")
+                mixer.music.set_volume(0.4)
+                mixer.music.play()
 
         # EVENTOS
         for evento in pg.event.get():
@@ -91,22 +81,13 @@ def pantalla_juego(pantalla, fuente, colores, matriz, dificultad, botones):
 
             elif evento.type == pg.MOUSEBUTTONDOWN and evento.button == 1:
                 # Botones
-                for texto, rect in botones.items(): # TEXTO == KEY // RECT == VALUE
-                    if rect.collidepoint(evento.pos):
-                        if texto == "REINICIAR":
-                            resultado  = "reiniciar"
-                            corriendo = False
-                        elif texto == "VOLVER":
-                            resultado  = "volver"
-                            corriendo = False
+                resultado, corriendo = botones_juego(pantalla, fuente, colores, botones, evento, resultado, corriendo)
 
                     # Disparo
-                    col = (evento.pos[0] - tablero_x) // (tam_casillero + margen)
-                    fila = (evento.pos[1] - tablero_y) // (tam_casillero + margen)
-                    if (0 <= fila < len(matriz)
-                            and 0 <= col < len(matriz[0])
-                            and juego_terminado == False
-                            and [fila, col] not in disparos_realizados):
+                col = (evento.pos[0] - tablero_x) // (tam_casillero + margen)
+                fila = (evento.pos[1] - tablero_y) // (tam_casillero + margen)
+
+                if (0 <= fila < len(matriz) and 0 <= col < len(matriz[0]) and juego_terminado == False and [fila, col] not in disparos_realizados):
 
                         disparos_realizados.append([fila, col])
 
@@ -129,33 +110,12 @@ def pantalla_juego(pantalla, fuente, colores, matriz, dificultad, botones):
                             disparo_errado.set_volume(0.4)
                             disparo_errado.play()
 
-        if juego_terminado == True:
-            if fondo_victoria_cargado == False:
-                fondo = pg.image.load("publico/imagenes/batalla-ganada.webp")
-                fondo_escalado = pg.transform.scale(fondo, (800, 600))
-                fondo_victoria_cargado = True
-
-            if musica_victoria_iniciada == False:
-                mixer.music.load("publico/musica/Musica_victoria.mp3")
-                mixer.music.play(-1)
-                mixer.music.set_volume(0.5)
-                musica_victoria_iniciada = True
-
-            pantalla.fill(colores["negro"])
-            pantalla.blit(fondo_escalado, (0, 0))
-            dibujar_botones(
-                pantalla, fuente, colores,
-                botones["VOLVER A MENU"], "VOLVER A MENU",
-                color_relleno="verde_militar", color_fuente="blanco"
-            )
-
-            if evento.type == pg.MOUSEBUTTONDOWN and evento.button == 1:
-                if botones["VOLVER A MENU"].collidepoint(evento.pos):
-                    mixer.music.stop()
-                    resultado = "volver a menu"
-                    corriendo = False
-                    musica_victoria_iniciada = False
-                    fondo_victoria_cargado = False
+        if juego_terminado:
+            
+            accion = pantalla_victoria(pantalla, fuente, colores, botones, evento)
+            if accion == 1: # VOLVER AL MENU
+                resultado = "volver a menu"
+                corriendo = False
 
         pg.display.flip()
 

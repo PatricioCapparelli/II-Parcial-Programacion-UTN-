@@ -8,15 +8,12 @@ from funciones.recursos.botones import *
 from funciones.modulos.musica import pausar_o_renaudar_musica
 from funciones.recursos.aviso import aviso
 
-mixer.init()
-
 def menu_principal(pantalla, fondo, fuente, colores, titulo, botones):
     dificultad_seleccionada = None
     nick = None
     corriendo = True
     musica_pausada = False
 
-    mixer.init()
     mixer.music.load("publico/musica/Musica_Menu2.mp3")
     mixer.music.play(-1)
     mixer.music.set_volume(0.5)

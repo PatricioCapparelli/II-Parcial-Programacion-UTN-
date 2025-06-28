@@ -11,5 +11,4 @@ pantalla, fondo, fuente, titulo = configurar_pantalla()
 
 menu_principal(pantalla, fondo, fuente, colores, titulo, botones)
 
-pg.quit()   
-
+pg.quit()

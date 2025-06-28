@@ -13,7 +13,20 @@ def dibujar_botones(pantalla, fuente, colores, rect, texto, color_relleno="celes
 def botones_menu_principal(pantalla, fuente, colores, botones):
     for indice,(texto, rect) in enumerate(botones.items()):
         if indice >= 5:
-            break\
+            break
         
         dibujar_botones(pantalla, fuente, colores, rect, texto)
-    
+
+def botones_juego(pantalla, fuente, colores, botones, evento, resultado, corriendo):
+    for indice,(texto, rect) in enumerate(botones.items()):
+            if indice == 5 or indice == 6:
+                dibujar_botones(pantalla, fuente, colores, rect, texto)
+            if rect.collidepoint(evento.pos):
+                if texto == "REINICIAR":
+                    resultado  = "reiniciar"
+                    corriendo = False
+                elif texto == "VOLVER":
+                    resultado  = "volver"
+                    corriendo = False
+
+    return resultado, corriendo
