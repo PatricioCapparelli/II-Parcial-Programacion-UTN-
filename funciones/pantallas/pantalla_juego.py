@@ -1,6 +1,8 @@
 import pygame as pg
 from funciones.modulos.verificar_nave_hundida import verificar_nave_hundida
 from funciones.recursos.botones import dibujar_botones
+import pygame.mixer as mixer
+mixer.init()
 
 agua = 0
 nave_intacta = 1
@@ -28,7 +30,7 @@ def pantalla_juego(pantalla, fuente, colores, matriz, dificultad, botones):
     resultado = "finalizado"
     juego_terminado = False
     mostrar_naves = False      # Modo debug
-
+    
     while corriendo:
         pantalla.blit(pg.image.load("publico/imagenes/02.jpg"), (0, 0))
 
@@ -64,19 +66,21 @@ def pantalla_juego(pantalla, fuente, colores, matriz, dificultad, botones):
 
         pantalla.blit(fuente.render(f"Puntaje:{puntaje:04}",
                                     True, colores["negro"]), (545, 200))
+        
+        pantalla.blit(fuente.render(f"Puntaje:{puntaje:04}",
+                                    True, colores["negro"]), (545, 200))
 
         if mostrar_naves:
             pantalla.blit(fuente.render("MODO DEBUG: ACTIVADO",
                                         True, colores["rojo"]), (545, 250))
             
-        print(sum(fila.count(nave_intacta) for fila in matriz))
+        #print(sum(fila.count(nave_intacta) for fila in matriz))
 
         # TODAS LAS NAVES HUNDIDAS?
         if juego_terminado == False:
             if sum(fila.count(nave_intacta) for fila in matriz) == 0:
                 juego_terminado = True
-                
-            
+
         # EVENTOS
         for evento in pg.event.get():
             if evento.type == pg.KEYDOWN and evento.key == pg.K_d:
@@ -106,6 +110,8 @@ def pantalla_juego(pantalla, fuente, colores, matriz, dificultad, botones):
                         if matriz[fila][col] == nave_intacta:        # Impacto
                             matriz[fila][col] = nave_impactada
                             puntaje += 5
+                            disparo_acertado = mixer.Sound("publico/sonidos/explosion.mp3")
+                            disparo_acertado.play()
 
                             hundida, partes = verificar_nave_hundida(matriz, fila, col)
                             if hundida:
@@ -115,6 +121,21 @@ def pantalla_juego(pantalla, fuente, colores, matriz, dificultad, botones):
                         elif matriz[fila][col] == agua:              # Agua 3
                             matriz[fila][col] = agua_errada
                             puntaje -= 1
+                            disparo_errado = mixer.Sound("publico/sonidos/agua.mp3")
+                            disparo_errado.play()
+
+        if juego_terminado == True:
+            fondo = pg.image.load("publico/imagenes/batalla-ganada.webp")
+            fondo_escalado = pg.transform.scale(fondo,(800,600))
+            pantalla.fill(colores["negro"])
+            pantalla.blit(fondo_escalado, (0,0))
+            dibujar_botones(pantalla, fuente, colores, botones["VOLVER A MENU"], "VOLVER A MENU", color_relleno="verde_militar", color_fuente="blanco")
+            if evento.type == pg.MOUSEBUTTONDOWN and evento.button == 1:
+                for texto, rect in botones.items(): # TEXTO == KEY // RECT == VALUE
+                        if rect.collidepoint(evento.pos):
+                            if texto == "VOLVER A MENU":
+                                resultado  = "volver a menu"
+                                corriendo = False
 
         pg.display.flip()
 

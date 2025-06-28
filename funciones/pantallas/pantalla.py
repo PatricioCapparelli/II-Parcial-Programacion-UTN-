@@ -14,7 +14,8 @@ botones = {
     "VOLVER_NIVEL": pg.Rect(300, 420, 200, 50),
     "FACIL": pg.Rect(300, 180, 200, 50),
     "MEDIO": pg.Rect(300, 260, 200, 50),
-    "DIFICIL": pg.Rect(300, 340, 200, 50)
+    "DIFICIL": pg.Rect(300, 340, 200, 50),
+    "VOLVER A MENU": pg.Rect(440, 520, 350, 50)
 }
 
 colores = {
@@ -27,7 +28,8 @@ colores = {
     "celeste": (135, 206, 235),
     "negro": (0, 0, 0),
     "transparente": (0, 0, 0, 0),
-    "naranja": (255, 165, 0)
+    "naranja": (255, 165, 0),
+    "verde_militar": (75, 83, 32)
     }
 
 def configurar_pantalla():
