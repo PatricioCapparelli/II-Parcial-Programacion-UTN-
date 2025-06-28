@@ -30,6 +30,9 @@ def pantalla_juego(pantalla, fuente, colores, matriz, dificultad, botones):
     resultado = "finalizado"
     juego_terminado = False
     mostrar_naves = False      # Modo debug
+    musica_victoria_iniciada = False
+    fondo_victoria_cargado = False
+
     
     while corriendo:
         pantalla.blit(pg.image.load("publico/imagenes/02.jpg"), (0, 0))
@@ -111,6 +114,7 @@ def pantalla_juego(pantalla, fuente, colores, matriz, dificultad, botones):
                             matriz[fila][col] = nave_impactada
                             puntaje += 5
                             disparo_acertado = mixer.Sound("publico/sonidos/explosion.mp3")
+                            disparo_acertado.set_volume(0.2)
                             disparo_acertado.play()
 
                             hundida, partes = verificar_nave_hundida(matriz, fila, col)
@@ -122,20 +126,36 @@ def pantalla_juego(pantalla, fuente, colores, matriz, dificultad, botones):
                             matriz[fila][col] = agua_errada
                             puntaje -= 1
                             disparo_errado = mixer.Sound("publico/sonidos/agua.mp3")
+                            disparo_errado.set_volume(0.4)
                             disparo_errado.play()
 
         if juego_terminado == True:
-            fondo = pg.image.load("publico/imagenes/batalla-ganada.webp")
-            fondo_escalado = pg.transform.scale(fondo,(800,600))
+            if fondo_victoria_cargado == False:
+                fondo = pg.image.load("publico/imagenes/batalla-ganada.webp")
+                fondo_escalado = pg.transform.scale(fondo, (800, 600))
+                fondo_victoria_cargado = True
+
+            if musica_victoria_iniciada == False:
+                mixer.music.load("publico/musica/Musica_victoria.mp3")
+                mixer.music.play(-1)
+                mixer.music.set_volume(0.5)
+                musica_victoria_iniciada = True
+
             pantalla.fill(colores["negro"])
-            pantalla.blit(fondo_escalado, (0,0))
-            dibujar_botones(pantalla, fuente, colores, botones["VOLVER A MENU"], "VOLVER A MENU", color_relleno="verde_militar", color_fuente="blanco")
+            pantalla.blit(fondo_escalado, (0, 0))
+            dibujar_botones(
+                pantalla, fuente, colores,
+                botones["VOLVER A MENU"], "VOLVER A MENU",
+                color_relleno="verde_militar", color_fuente="blanco"
+            )
+
             if evento.type == pg.MOUSEBUTTONDOWN and evento.button == 1:
-                for texto, rect in botones.items(): # TEXTO == KEY // RECT == VALUE
-                        if rect.collidepoint(evento.pos):
-                            if texto == "VOLVER A MENU":
-                                resultado  = "volver a menu"
-                                corriendo = False
+                if botones["VOLVER A MENU"].collidepoint(evento.pos):
+                    mixer.music.stop()
+                    resultado = "volver a menu"
+                    corriendo = False
+                    musica_victoria_iniciada = False
+                    fondo_victoria_cargado = False
 
         pg.display.flip()
 

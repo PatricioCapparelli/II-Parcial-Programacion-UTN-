@@ -17,7 +17,7 @@ def menu_principal(pantalla, fondo, fuente, colores, titulo, botones):
     musica_pausada = False
 
     mixer.init()
-    mixer.music.load("publico/musica/Musica_Menu.mp3")
+    mixer.music.load("publico/musica/Musica_Menu2.mp3")
     mixer.music.play(-1)
     mixer.music.set_volume(0.5)
 
