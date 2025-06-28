@@ -6,6 +6,15 @@ from funciones.pantallas.pantalla import *
 from funciones.pantallas.pantalla_pedir_nick import pedir_nick
 
 def jugar(pantalla, fuente, colores, dificultad, nick=None):
+    '''Se encarga de mostrar la pantalla del juego iniciado.
+        args:
+        -pantalla:Tuple
+        -fuente:Str
+        -colores:Tuple
+        -dificultad:Str
+        -nick:Str
+        return:int
+        '''
     if nick == None:
         fondo = pg.image.load("publico/imagenes/02.jpg").convert()
         nick = pedir_nick(pantalla, fondo, fuente, colores)

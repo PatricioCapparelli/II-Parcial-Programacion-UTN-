@@ -11,6 +11,7 @@ from funciones.recursos.aviso import aviso
 mixer.init()
 
 def menu_principal(pantalla, fondo, fuente, colores, titulo, botones):
+    '''Se encarga de '''
     dificultad_seleccionada = None
     nick = None
     corriendo = True

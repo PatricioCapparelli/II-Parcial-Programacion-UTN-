@@ -43,7 +43,10 @@ def colocar_naves(matriz, cantidad, tamaño):
                 colocadas += 1
 
 def crear_tablero_inicial(nivel: str) -> list:
-    """Crea un tablero con las naves colocadas segun el nivel."""
+    """Crea un tablero con las naves colocadas segun el nivel.
+        Args:
+        -nivel: 
+        Return: Retorna un una matriz que representa el tablero """
     if nivel == "facil":
         filas = 10
         columnas = 10
