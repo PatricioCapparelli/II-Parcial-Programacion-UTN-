@@ -5,6 +5,8 @@ from funciones.modulos.puntajes import mostrar_puntajes_json
 import pygame.mixer as mixer
 from funciones.modulos.tablero import *
 from funciones.recursos.botones import *
+from funciones.modulos.musica import pausar_o_renaudar_musica
+from funciones.recursos.aviso import aviso
 
 mixer.init()
 
@@ -37,16 +39,14 @@ def menu_principal(pantalla, fondo, fuente, colores, titulo, botones):
                                 dificultad_seleccionada = nivel
                                 print(f"Nivel seleccionado: {dificultad_seleccionada}")
 
-                        elif texto == "JUGAR" and dificultad_seleccionada:
-                            nick = jugar(pantalla, fuente, colores, dificultad_seleccionada, nick)
+                        elif texto == "JUGAR":
+                            if dificultad_seleccionada:
+                                nick = jugar(pantalla, fuente, colores, dificultad_seleccionada, nick)
+                            else:
+                                aviso(pantalla, fuente, colores, "Elige una dificultad")
 
                         elif texto == "MUSICA":
-                            if musica_pausada:
-                                mixer.music.unpause()
-                                musica_pausada = False
-                            else:
-                                mixer.music.pause()
-                                musica_pausada = True
+                            musica_pausada = pausar_o_renaudar_musica(musica_pausada)
 
                         elif texto == "PUNTAJES":
                             mostrar_puntajes_json(pantalla, fuente, colores)

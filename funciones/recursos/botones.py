@@ -1,7 +1,7 @@
 import pygame as pg
 
-def dibujar_botones(pantalla, fuente, colores, rect, texto):
-    pg.draw.rect(pantalla, colores["celeste"], rect)
+def dibujar_botones(pantalla, fuente, colores, rect, texto, color_relleno="celeste"):
+    pg.draw.rect(pantalla, colores[color_relleno], rect)
     pg.draw.rect(pantalla, colores["negro"], rect, 2)
     texto_render = fuente.render(texto, True, colores["negro"])
     pantalla.blit(
