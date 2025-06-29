@@ -15,7 +15,8 @@ botones = {
     "FACIL": pg.Rect(300, 180, 200, 50),
     "MEDIO": pg.Rect(300, 260, 200, 50),
     "DIFICIL": pg.Rect(300, 340, 200, 50),
-    "VOLVER A MENU": pg.Rect(440, 520, 350, 50)
+    "VOLVER A MENU": pg.Rect(440, 520, 350, 50),
+    "VOLVER_DE_PUNTAJES": pg.Rect(300, 300, 210, 50)
 }
 
 colores = {
