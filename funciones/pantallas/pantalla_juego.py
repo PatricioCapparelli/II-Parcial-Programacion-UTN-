@@ -43,10 +43,10 @@ def pantalla_juego(pantalla, fuente, colores, matriz, dificultad, botones):
                                 break
                         color = colores["rojo"] if es_hundida else colores["naranja"]
                     else:                                       
-                        color = colores["azul"] # Agua o agua errada
+                        color = colores["azul"] # agua errada
                 else:        # Celda sin revelar
                     if mostrar_naves and valor == nave_intacta: # Mostrar naves (debug)
-                        color = colores["verde"]
+                        color = colores["verde"]    
                     else:
                         color = colores["celeste"]
 
@@ -72,12 +72,16 @@ def pantalla_juego(pantalla, fuente, colores, matriz, dificultad, botones):
                 juego_terminado = True
                 mixer.music.load("publico/musica/Musica_victoria.mp3")
                 mixer.music.set_volume(0.4)
-                mixer.music.play()
+                mixer.music.play(-1)
 
         # EVENTOS
         for evento in pg.event.get():
-            if evento.type == pg.KEYDOWN and evento.key == pg.K_d:
-                mostrar_naves = not mostrar_naves
+            if evento.type == pg.KEYDOWN and evento.key == pg.K_d: # debug 'D'
+                if mostrar_naves:
+                    mostrar_naves = False
+                else:
+                    mostrar_naves = True
+
 
             elif evento.type == pg.MOUSEBUTTONDOWN and evento.button == 1:
                 # Botones

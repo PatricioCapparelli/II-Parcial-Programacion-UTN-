@@ -1,6 +1,8 @@
 import pygame as pg
 import json
 import os
+from funciones.recursos.botones import dibujar_botones
+from funciones.pantallas.pantalla import *
 
 def guardar_puntaje_json(nick, puntaje):
     archivo = "puntajes.json"
@@ -35,11 +37,7 @@ def mostrar_puntajes_json(pantalla, fuente, colores):
         pantalla.blit(texto, (250, y))
         y += 40
 
-    boton_volver = pg.Rect(300, y + 40, 200, 50) 
-    pg.draw.rect(pantalla, colores["negro"], boton_volver, width=2, border_radius=10)
-    texto_volver = fuente.render("VOLVER", True, colores["negro"])
-    text_rect = texto_volver.get_rect(center=boton_volver.center) 
-    pantalla.blit(texto_volver, text_rect)
+    dibujar_botones(pantalla, fuente, colores, botones["VOLVER_DE_PUNTAJES"], "VOLVER")
 
     pg.display.flip()
 
@@ -49,6 +47,6 @@ def mostrar_puntajes_json(pantalla, fuente, colores):
             if evento.type == pg.KEYDOWN and evento.key == pg.K_ESCAPE:
                 esperando = False
             elif evento.type == pg.MOUSEBUTTONDOWN and evento.button == 1:
-                if boton_volver.collidepoint(evento.pos):
+                if botones["VOLVER_DE_PUNTAJES"].collidepoint(evento.pos):
                     esperando = False
 

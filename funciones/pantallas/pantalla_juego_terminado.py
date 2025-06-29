@@ -16,7 +16,7 @@ def pantalla_victoria(pantalla, fuente, colores, botones, evento):
     fondo_escalado = pg.transform.scale(fondo, (800, 600))
     pantalla.blit(fondo_escalado, (0, 0))
 
-    dibujar_botones(pantalla, fuente, colores,  botones["VOLVER A MENU"], "VOLVER A MENU",color_relleno="verde_militar", color_fuente="blanco")
+    dibujar_botones(pantalla, fuente, colores, botones["VOLVER A MENU"], "VOLVER A MENU", color_relleno="verde_militar", color_fuente="blanco")
 
     if evento.type == pg.MOUSEBUTTONDOWN and evento.button == 1:
         if botones["VOLVER A MENU"].collidepoint(evento.pos):
