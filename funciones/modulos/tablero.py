@@ -1,45 +1,49 @@
 import random
 from funciones.recursos.inicializar_matriz import inicializar_matriz
-import pygame as pg
 
 longitud_submarino = 1
 longitud_destructor = 2
 longitud_crucero = 3
 longitud_acorazado = 4
 
-def celda_valida(matriz, f, c):
-    """Devuelve True si (f,c) y sus 8 vecinos están vacíos (0)."""
-    filas, columnas = len(matriz), len(matriz[0])
-    for i in range(f-1, f+2):
-        for j in range(c-1, c+2):
-            if 0 <= i < filas and 0 <= j < columnas and matriz[i][j] != 0:
-                return False
-    return True
+def celda_valida(matriz, fila, columna):
+    """Devuelve True si (fila,columna) y sus 8 vecinos están vacíos (0)."""
+    filas = len(matriz)
+    columnas = len(matriz[0])
+    es_valido = True
+
+    for i in range(fila - 1, fila + 2):
+        for j in range(columna - 1, columna + 2):
+            if 0 <= i < filas and 0 <= j < columnas and matriz[i][j] != 0: #para que no tenga ninguna celda vecina como barco
+                es_valido = False
+
+    return es_valido
 
 
-def colocar_naves(matriz, cantidad, tamaño):
+def colocar_naves(matriz, cantidad, tamaño) -> None:
     """Coloca `cantidad` barcos de `tamaño` sin superponerse ni tocarse."""
-    filas, columnas = len(matriz), len(matriz[0])
+    filas = len(matriz)
+    columnas = len(matriz[0])
     colocadas = 0
 
     while colocadas < cantidad:
-        horiz = random.choice([True, False])
+        horiz = random.choice([True, False]) # al azar elige en que orientacion colocolar la nave (h/v)
 
         if horiz:                              # Horizontal
-            f = random.randint(0, filas - 1)
-            c = random.randint(0, columnas - tamaño)
-            libre = all(celda_valida(matriz, f, c+i) for i in range(tamaño))
+            fila = random.randint(0, filas - 1)
+            columna = random.randint(0, columnas - tamaño)
+            libre = all(celda_valida(matriz, fila, columna + i) for i in range(tamaño))
             if libre:
                 for i in range(tamaño):
-                    matriz[f][c+i] = 1
+                    matriz[fila][columna + i] = 1
                 colocadas += 1
         else:                                  # Vertical
-            f = random.randint(0, filas - tamaño)
-            c = random.randint(0, columnas - 1)
-            libre = all(celda_valida(matriz, f+i, c) for i in range(tamaño))
+            fila = random.randint(0, filas - tamaño)
+            columna = random.randint(0, columnas - 1)
+            libre = all(celda_valida(matriz, fila + i, columna) for i in range(tamaño))
             if libre:
                 for i in range(tamaño):
-                    matriz[f+i][c] = 1
+                    matriz[fila + i][columna] = 1
                 colocadas += 1
 
 def crear_tablero_inicial(nivel: str) -> list:
@@ -70,7 +74,6 @@ def crear_tablero_inicial(nivel: str) -> list:
         acorazados = 3
 
     matriz = inicializar_matriz(filas, columnas, 0)
-
     colocar_naves(matriz, submarinos, longitud_submarino)
     colocar_naves(matriz, destructores, longitud_destructor)
     colocar_naves(matriz, cruceros, longitud_crucero)

@@ -11,3 +11,6 @@ def aviso(pantalla, fuente, colores, mensaje, ms=1500, color_relleno="rojo", w=4
 
     pg.display.flip()
     pg.time.wait(ms)
+
+    # EVENTOS DEL JUEGO
+        

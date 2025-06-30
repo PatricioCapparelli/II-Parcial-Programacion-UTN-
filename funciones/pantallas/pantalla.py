@@ -2,6 +2,11 @@ import pygame as pg
 import pygame.mixer as mixer
 
 mixer.init()
+# globales
+agua = 0
+nave_intacta = 1
+nave_impactada = 2
+agua_impactada = 3
 
 botones = {
     "NIVEL": pg.Rect(300, 200, 200, 50),
