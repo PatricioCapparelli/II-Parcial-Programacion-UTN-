@@ -11,7 +11,7 @@ def jugar(pantalla, fuente, colores, dificultad, nick=None):
         nick = pedir_nick(pantalla, fondo, fuente, colores)
 
     matriz = crear_tablero_inicial(dificultad)
-    resultado, puntaje = pantalla_juego(pantalla, fuente, colores, matriz, dificultad, botones)
+    resultado, puntaje = pantalla_juego(pantalla, fuente, matriz, dificultad)
 
     if resultado == "reiniciar":
         valor = jugar(pantalla, fuente, colores, dificultad, nick)

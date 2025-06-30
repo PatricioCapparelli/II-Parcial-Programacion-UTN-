@@ -62,5 +62,25 @@
     {
         "nick": "s",
         "puntaje": 300
+    },
+    {
+        "nick": "d",
+        "puntaje": 30
+    },
+    {
+        "nick": "d",
+        "puntaje": 3
+    },
+    {
+        "nick": "d",
+        "puntaje": 70
+    },
+    {
+        "nick": "s",
+        "puntaje": 291
+    },
+    {
+        "nick": "s",
+        "puntaje": 298
     }
 ]
