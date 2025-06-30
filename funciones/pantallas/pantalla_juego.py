@@ -11,6 +11,16 @@ from funciones.pantallas.pantalla import *
 mixer.init()
 
 def pantalla_juego(pantalla, fuente, matriz, dificultad):
+    '''Esta funcion se encarga de administrar la pantalla del juego
+
+    Args:
+    -pantalla:Recibe el tamaño de la pantalla del juego
+    -fuente:Recibe la fuente del texto
+    -matriz:Recibe la matriz que representa el tablero
+    -dificultad:Recibe la rificultad seleccionada por el jugador
+
+    Return:Retorna el puntaje alcanzado por el jugador y 
+    '''
     
     tam_casillero, tablero_x, tablero_y = devolver_dificultad(dificultad)
     margen = 2

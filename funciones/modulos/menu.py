@@ -10,15 +10,15 @@ from funciones.recursos.aviso import aviso
 
 mixer.init()
 
-def menu_principal(pantalla:tuple, fondo, fuente, colores, titulo, botones:tuple)->None:
+def menu_principal(pantalla:tuple, fondo, fuente:str, colores:dict, titulo, botones:dict)->None:
     '''Se encarga de la interaccion con el menú
         Args:
         -pantalla:
-        -fondo:
-        -fuente:
-        -colores:
+        -fondo:Recibe el fondo 
+        -fuente:Recibe la fuente del texto
+        -colores:Recibe el diccionario de los colores
         -titulo:
-        -botones:
+        -botones:Recibe el diccionario de los botones
         Returno:Ninguno
         '''
     dificultad_seleccionada = None
