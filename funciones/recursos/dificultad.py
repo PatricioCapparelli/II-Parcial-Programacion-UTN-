@@ -1,4 +1,9 @@
-def devolver_dificultad(dificultad) -> int:
+def devolver_dificultad(dificultad:str) -> int:
+    '''Esta funcion se encarga de definir el tamaño del tablero a partir de la dificultad seleccionada.
+    
+    Args:Recibe la dificultad seleccionada por el jugador
+
+    Return: Retorna el tamaño de cada casillero y la posicion en la que se ubica el inicio del tablero dependiendo de la dificultad seleccionada'''
 
     match dificultad:
         case "facil":

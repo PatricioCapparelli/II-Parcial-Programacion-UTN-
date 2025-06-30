@@ -3,7 +3,7 @@ def inicializar_matriz(cant_filas:int, cant_columnas:int, valor_inicial: any) ->
     Args:
         Recibe la cantidad de filas, columnas y el valor que se le dará a todos los numeros de la matriz.
     Returns:
-        La matriz generada
+        Retorna la matriz generada
     """
     matriz = []
     for i in range(cant_filas):

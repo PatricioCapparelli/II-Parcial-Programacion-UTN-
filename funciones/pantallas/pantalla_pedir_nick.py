@@ -1,9 +1,18 @@
 import pygame as pg
 
-def pedir_nick(pantalla, fondo, fuente, colores):
+def pedir_nick(pantalla:tuple, fuente:str, colores:dict):
+    '''Esta funcion se encarga de solicitar al jugador que introduzca el nick
+    
+    Args:
+    -pantalla:Recibe el tamaño de la pantalla
+    -fuente:Recibe la fuente seleccionada para el texto
+    -colores:Recibe el diccionario colores.
+    
+    Return:Retorna el nick introducido por el jugador'''
     nick = ""
     activo = True
     caja = pg.Rect(50, 150, 500, 40) 
+    fondo = pg.image.load("publico/imagenes/02.jpg").convert()
 
     while activo:
         for evento in pg.event.get():

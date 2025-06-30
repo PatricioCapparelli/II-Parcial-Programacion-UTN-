@@ -4,13 +4,12 @@ import os
 from funciones.recursos.botones import dibujar_botones
 from funciones.pantallas.pantalla import *
 
-def guardar_puntaje_json(nick, puntaje):
+def guardar_puntaje_json(nick:str, puntaje:int)->None:
     '''Se encarga de guardar el puntaje logrado en un archivo json.
         Args:
-        -nick
-        -puntaje
-        Return:
-        Retorna el 
+        -nick:Recibe el nick introducido por el jugador al comenzar la partida
+        -puntaje:Recibe el puntaje que logro el jugador
+        Return: Ninguno
     '''
     archivo = "puntajes.json"
     datos = []
@@ -21,7 +20,13 @@ def guardar_puntaje_json(nick, puntaje):
     with open(archivo, "w", encoding="utf-8") as f:
         json.dump(datos, f, indent=4)
 
-def mostrar_puntajes_json(pantalla, fuente, colores):
+def mostrar_puntajes_json(pantalla:tuple, fuente:str, colores:dict):
+    '''Esta funcion se ebcarga de mostrar los puntajes del jugador desde el archivo json con los puntajes
+    Args:
+    -
+    -
+    -colores:Recibe el diccionario 
+    '''
     fondo2 = pg.image.load("publico/imagenes/02.jpg")
     pantalla.blit(fondo2, (0, 0))
     titulo_render = fuente.render("PUNTAJES", True, colores["negro"])

@@ -6,8 +6,16 @@ longitud_destructor = 2
 longitud_crucero = 3
 longitud_acorazado = 4
 
-def celda_valida(matriz, fila, columna):
-    """Devuelve True si (fila,columna) y sus 8 vecinos están vacíos (0)."""
+def celda_valida(matriz:list, fila:int, columna:int)->bool:
+    """Indica si el casillero seleccionado y sus 8 vecinos están vacíos.
+    
+    Args:
+    -matriz:Recibe la matriz del tablero
+    -fila:Recibe la coordenada x del casillero seleccionado
+    -columna:Recibe la coordenada y del casillero seleccionado
+    
+    Return:Retorna un booleano dependiendo de si al celda es valida para colocar un barco o no
+    """
     filas = len(matriz)
     columnas = len(matriz[0])
     es_valido = True
@@ -21,7 +29,14 @@ def celda_valida(matriz, fila, columna):
 
 
 def colocar_naves(matriz, cantidad, tamaño) -> None:
-    """Coloca `cantidad` barcos de `tamaño` sin superponerse ni tocarse."""
+    """Coloca 'cantidad' barcos de 'tamaño' sin superponerse ni tocarse.
+    
+    Args:
+    -matriz:Recibe la amtriz que representa el tablero del juego
+    -cantidad:Recibe la cantidad de barcos que debe colocar 
+    -tamaño:Recibe el tamañod de los barcos que debe colocar en el tablero
+    
+    Return:Ninguno"""
     filas = len(matriz)
     columnas = len(matriz[0])
     colocadas = 0
@@ -49,8 +64,9 @@ def colocar_naves(matriz, cantidad, tamaño) -> None:
 def crear_tablero_inicial(nivel: str) -> list:
     """Crea un tablero con las naves colocadas segun el nivel.
         Args:
-        -nivel: 
-        Return: Retorna un una matriz que representa el tablero """
+        -nivel: Recibe el nivel seleccionado por el jugador
+
+        Return: Retorna una matriz que representa el tablero dependiendo  del nivel seleccionado"""
     if nivel == "facil":
         filas = 10
         columnas = 10
