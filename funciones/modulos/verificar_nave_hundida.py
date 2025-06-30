@@ -1,9 +1,12 @@
 def verificar_nave_hundida(tablero, fila_inicial, columna_inicial):
-    """
-    Devuelve (hundida: bool, partes: list[[fila, columna], ...])
+    """Esta funcion se encarga de verificar si la nave disparada fue hundida o no.
 
-    - hundida  → True  si la nave (máx. 4 celdas) está totalmente impactada (valor 2).
-    - partes   → coordenadas de todas sus piezas si está hundida; lista vacía de lo contrario.
+    Args:
+    -tabero
+    -fila_inicial
+    -columna_inicial
+
+    Return: Retorna un booleano si la nave esta hundida o no, y en caso de estar hundida, una lista con las coordenadas de las partes que componen el barco
     """
 
     #Estado inicial
