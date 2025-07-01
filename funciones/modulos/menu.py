@@ -11,7 +11,7 @@ from funciones.recursos.aviso import aviso
 mixer.init()
 
 def menu_principal(pantalla:tuple, fuente:str, colores:dict, botones:dict)->None:
-    '''Se encarga de la interaccion con el menú
+    '''Se encarga de la interaccion con el menu
     
         Args:
         -pantalla:Recibe el tamaño de la pantalla
@@ -19,7 +19,7 @@ def menu_principal(pantalla:tuple, fuente:str, colores:dict, botones:dict)->None
         -colores:Recibe el diccionario de los colores
         -botones:Recibe el diccionario de los botones
 
-        Returno:Ninguno
+        Return:Ninguno
         '''
     titulo = pg.image.load("publico/imagenes/05.png")
     titulo = pg.transform.scale(titulo,(800,140))
@@ -28,7 +28,6 @@ def menu_principal(pantalla:tuple, fuente:str, colores:dict, botones:dict)->None
     nick = None
     corriendo = True
     musica_pausada = False
-    mixer.init()
     mixer.music.load("publico/musica/Musica_Menu2.mp3")
     mixer.music.play(-1)
     mixer.music.set_volume(0.5)

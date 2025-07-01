@@ -98,5 +98,21 @@
     {
         "nick": "hola",
         "puntaje": 220
+    },
+    {
+        "nick": "d",
+        "puntaje": 300
+    },
+    {
+        "nick": "d",
+        "puntaje": 0
+    },
+    {
+        "nick": "d",
+        "puntaje": 75
+    },
+    {
+        "nick": "d",
+        "puntaje": 291
     }
 ]

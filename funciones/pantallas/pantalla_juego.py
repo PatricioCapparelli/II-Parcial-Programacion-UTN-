@@ -10,8 +10,8 @@ from funciones.pantallas.pantalla import *
 
 mixer.init()
 
-def pantalla_juego(pantalla:tuple, fuente:str, matriz:list, dificultad:str)->tuple[int, str]:
-    '''Esta funcion se encarga de administrar la pantalla del juego
+def pantalla_juego(pantalla:tuple, fuente:str, matriz:list, dificultad:str)->tuple[str, int]:
+    '''Esta funcion se encarga de administrar la pantalla del juego y la funcionalidad
 
     Args:
     -pantalla:Recibe el tamaño de la pantalla del juego
@@ -64,7 +64,7 @@ def pantalla_juego(pantalla:tuple, fuente:str, matriz:list, dificultad:str)->tup
                 # Botones
                 resultado, corriendo = botones_juego(pantalla, fuente, colores, botones, evento, resultado, corriendo)
                     # Disparo
-                col = (evento.pos[0] - tablero_x) // (tam_casillero + margen) # convierte las el click en una coordenada del tablero en columna
+                col = (evento.pos[0] - tablero_x) // (tam_casillero + margen) # convierte el click en una coordenada del tablero en columna
                 fila = (evento.pos[1] - tablero_y) // (tam_casillero + margen) # ... en fila
 
                 if (0 <= fila < len(matriz) and 0 <= col < len(matriz[0]) and juego_terminado == False and [fila, col] not in disparos_realizados): # validacion para poder jugar, clickear un casillero valido
