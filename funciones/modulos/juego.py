@@ -5,15 +5,17 @@ from funciones.pantallas.pantalla_juego import pantalla_juego
 from funciones.pantallas.pantalla import *
 from funciones.pantallas.pantalla_pedir_nick import pedir_nick
 
-def jugar(pantalla:tuple, fuente:str, colores:tuple, dificultad:str, nick:str=None)->int:
+def jugar(pantalla:tuple, fuente:str, colores:dict, dificultad:str, nick:str=None)->str:
     '''Se encarga de mostrar la pantalla del juego iniciado.
+
         args:
         -pantalla:Recibe el tamaño de la pantalla del juego
         -fuente:Recibe la fuente del texto
-        -colores:
-        -dificultad:
-        -nick:
-        return:Retorna el 
+        -colores:Recibe el diccionario con los colores
+        -dificultad:Recibe la dificaultad seleccionada por el jugador
+        -nick:Recibe el nombre del jugador en caso de haber reiniciado o vuelto a jugar con el mismo
+        
+        return:Retorna el nick introducido por el jugador para guardarlo.
         '''
     if nick == None:
         nick = pedir_nick(pantalla, fuente, colores)

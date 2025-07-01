@@ -1,4 +1,4 @@
-def devolver_dificultad(dificultad:str) -> int:
+def devolver_dificultad(dificultad:str) -> tuple[int, int, int]:
     '''Esta funcion se encarga de definir el tamaño del tablero a partir de la dificultad seleccionada.
     
     Args:Recibe la dificultad seleccionada por el jugador

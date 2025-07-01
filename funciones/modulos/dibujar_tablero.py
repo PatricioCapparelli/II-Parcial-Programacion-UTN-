@@ -2,7 +2,7 @@ import pygame as pg
 from funciones.pantallas.pantalla_juego import *
 from funciones.pantallas.pantalla import *
 
-def dibujar_tablero(pantalla:tuple, tablero_x:int, tablero_y:int, tam_casillero:int, margen:int, matriz:list, disparos_realizados:list, naves_hundidas:list, mostrar_naves, nave_intacta):
+def dibujar_tablero(pantalla:tuple, tablero_x:int, tablero_y:int, tam_casillero:int, margen:int, matriz:list, disparos_realizados:list, naves_hundidas:list, mostrar_naves:bool, nave_intacta:int):
     '''Esta funcion se encarga de dibujar el tablero
     
     Args:
@@ -14,8 +14,8 @@ def dibujar_tablero(pantalla:tuple, tablero_x:int, tablero_y:int, tam_casillero:
     -matriz:Recibe la matriz que representa el tablero de juego
     -disparos_realizados:Recibe una lista con als coordenadas de los disparos realizados
     -naves_hundidas:Recibe una lista con las coordenadas de las naves hundidas
-    -mostrar_naves:
-    -nave_intacta:
+    -mostrar_naves:Recibe ek booleano del modo debug
+    -nave_intacta:Recibe el numero que representa una nave intecta en el tablero
     
     Return:Ninguno'''
     # DIBUJAR TABLERO 
@@ -45,5 +45,4 @@ def dibujar_tablero(pantalla:tuple, tablero_x:int, tablero_y:int, tam_casillero:
                     color = colores["celeste"]
 
             pg.draw.rect(pantalla, color, (x, y, tam_casillero, tam_casillero))
-            pg.draw.rect(pantalla, colores["negro"],
-                        (x, y, tam_casillero, tam_casillero), 1)
+            pg.draw.rect(pantalla, colores["negro"], (x, y, tam_casillero, tam_casillero), 1)

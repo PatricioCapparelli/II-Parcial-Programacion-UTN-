@@ -12,13 +12,13 @@ mixer.init()
 
 def menu_principal(pantalla:tuple, fuente:str, colores:dict, botones:dict)->None:
     '''Se encarga de la interaccion con el menú
+    
         Args:
-        -pantalla:
-        -fondo:Recibe el fondo 
+        -pantalla:Recibe el tamaño de la pantalla
         -fuente:Recibe la fuente del texto
         -colores:Recibe el diccionario de los colores
-        -titulo:
         -botones:Recibe el diccionario de los botones
+
         Returno:Ninguno
         '''
     titulo = pg.image.load("publico/imagenes/05.png")

@@ -10,7 +10,7 @@ from funciones.pantallas.pantalla import *
 
 mixer.init()
 
-def pantalla_juego(pantalla, fuente, matriz, dificultad):
+def pantalla_juego(pantalla:tuple, fuente:str, matriz:list, dificultad:str)->tuple[int, str]:
     '''Esta funcion se encarga de administrar la pantalla del juego
 
     Args:
@@ -19,7 +19,7 @@ def pantalla_juego(pantalla, fuente, matriz, dificultad):
     -matriz:Recibe la matriz que representa el tablero
     -dificultad:Recibe la rificultad seleccionada por el jugador
 
-    Return:Retorna el puntaje alcanzado por el jugador y 
+    Return:Retorna el puntaje alcanzado por el jugador y boton seleccionado
     '''
     
     tam_casillero, tablero_x, tablero_y = devolver_dificultad(dificultad)
@@ -92,7 +92,7 @@ def pantalla_juego(pantalla, fuente, matriz, dificultad):
 
         if juego_terminado:
             accion = pantalla_victoria(pantalla, fuente, colores, botones, evento)
-            if accion == 1: # VOLVER AL MENU
+            if accion: # VOLVER AL MENU
                 resultado = "volver a menu"
                 corriendo = False
 

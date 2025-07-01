@@ -3,6 +3,7 @@ from funciones.recursos.botones import dibujar_botones
 
 def aviso(pantalla:tuple, fuente:str, colores:dict, mensaje:str, ms:int=1500, color_relleno:tuple="rojo", ancho:int=440, alto:int=70, offset_y=100):
     '''Se encarga de avisar al jugador de que elija un nivel antes de tocar "jugar"
+
     args:
     -pantalla: Recibe el tamaño de la pantalla.
     -fuente: Recibe la fuente del texto
@@ -12,7 +13,8 @@ def aviso(pantalla:tuple, fuente:str, colores:dict, mensaje:str, ms:int=1500, co
     -color_relleno:Recibe el nombre del color de relleno del aviso definido en el diccionario colores, que por defecto esta puesto en rojo.
     -ancho:Recibe el ancho del aviso
     -alto:Recibe el alto del aviso
-    -offset_y:
+    -offset_y:Recibe el desplazamiento en "y" que tiene el aviso, se encuentra predefinido en 100.
+
     Return:Ninguno
     '''
     rect = pg.Rect(0, 0, ancho, alto)

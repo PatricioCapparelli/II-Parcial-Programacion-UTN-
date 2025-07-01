@@ -2,7 +2,16 @@ import pygame as pg
 from funciones.pantallas.pantalla import *
 from funciones.recursos.botones import *
 
-def pantalla_dificultad(pantalla, fuente, colores, botones) -> str:
+def pantalla_dificultad(pantalla:tuple, fuente:str, colores:dict, botones:dict) -> str:
+    '''Esta funcion se encarga de administrar la pantalla de selecciond e dificultad
+    
+    Args:
+    -pantalla:Recibe el tamaño de la pantallla de juego
+    -fuente:Recibe la fuente del texto
+    -colores:Recibe el diccionario con los colores
+    -botones:Recibe el diccionario con los botones
+    
+    Return:Retorna la dificultad seleccionada por el jugador'''
     fuente2 = pg.font.SysFont("Berlin Sans FB", 42)
     dificultad = None
 

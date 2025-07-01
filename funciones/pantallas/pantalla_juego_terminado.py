@@ -5,13 +5,19 @@ from funciones.recursos.botones import dibujar_botones
 
 mixer.init()
 
-def pantalla_victoria(pantalla, fuente, colores, botones, evento):
+def pantalla_victoria(pantalla:tuple, fuente:str, colores:dict, botones:dict, evento:tuple):
+    """Esta funcion se encarga de administrar la pantalla de victoria
+
+    Args:
+    -pantalla:Recibe la pantalla del juego
+    -fuente:Recibe al fuente del texto
+    -colores:Recibe el diccionario con los colores
+    -botones:Recibe el diccionario con los botones
+    -evento:Recibe el evento de pygame
+
+    Return:Retorna un booleano dependiendo de si se desea volver al menu o no.
     """
-    Devuelve:
-        valor = 0  → no se hizo clic
-        valor = 1  → clic en "VOLVER A MENU"
-    """
-    valor = 0 #flag    
+    valor = False #flag    
     fondo = pg.image.load("publico/imagenes/batalla-ganada.webp")
     fondo_escalado = pg.transform.scale(fondo, (800, 600))
     pantalla.blit(fondo_escalado, (0, 0))
@@ -23,7 +29,7 @@ def pantalla_victoria(pantalla, fuente, colores, botones, evento):
             mixer.music.stop()
             fondo = None
             fondo_escalado = None
-            valor = 1      # se hizo clic
+            valor = True      # se hizo clic
 
     pg.display.flip()
 

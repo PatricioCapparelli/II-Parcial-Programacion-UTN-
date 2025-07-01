@@ -38,7 +38,13 @@ colores = {
     "verde_militar": (75, 83, 32)
     }
 
-def configurar_pantalla():
+def configurar_pantalla()->tuple[tuple, str]:
+    '''Esta funcion se encarga de definir el tamaño de la pantalla y la fuente del texto
+
+    Args:Ninguno
+
+    Return:Retorna la pantalla del juego con su tamaño y la fuente del texto
+    '''
     pantalla = pg.display.set_mode((800, 600))
     pg.display.set_caption("Batalla Naval - Menu Inicial")
     fuente = pg.font.SysFont("CASTELLAR", 30)

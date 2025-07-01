@@ -45,8 +45,8 @@ def botones_juego(pantalla, fuente, colores, botones, evento, resultado, corrien
     -fuente:Recibe la fuente del texto
     -colores:Recibe el diccionario de colores
     -botones:Recibe el diccionario de botones
-    -evento:
-    -resultado:Recibe 
+    -evento:Recibe el evento de pygame
+    -resultado:Recibe el estado del ultimo boton apretado
     -corriendo:Recibe el estado del la partida para cambiarlo dependiendo del boton
 
     Return:Retorna el boton soleccioando y el estado de la partida, en el caso de salir o reiniciar.

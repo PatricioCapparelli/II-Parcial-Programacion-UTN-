@@ -6,9 +6,11 @@ from funciones.pantallas.pantalla import *
 
 def guardar_puntaje_json(nick:str, puntaje:int)->None:
     '''Se encarga de guardar el puntaje logrado en un archivo json.
+    
         Args:
         -nick:Recibe el nick introducido por el jugador al comenzar la partida
         -puntaje:Recibe el puntaje que logro el jugador
+
         Return: Ninguno
     '''
     archivo = "puntajes.json"
@@ -20,12 +22,14 @@ def guardar_puntaje_json(nick:str, puntaje:int)->None:
     with open(archivo, "w", encoding="utf-8") as f:
         json.dump(datos, f, indent=4)
 
-def mostrar_puntajes_json(pantalla:tuple, fuente:str, colores:dict):
+def mostrar_puntajes_json(pantalla:tuple, fuente:str, colores:dict)->None:
     '''Esta funcion se ebcarga de mostrar los puntajes del jugador desde el archivo json con los puntajes
     Args:
-    -
-    -
+    -pantalla:Recibe el tamañod e la pantalla del juego
+    -fuente:Recibe la fuente del texto
     -colores:Recibe el diccionario 
+
+    Return:Ninguno
     '''
     fondo2 = pg.image.load("publico/imagenes/02.jpg")
     pantalla.blit(fondo2, (0, 0))
