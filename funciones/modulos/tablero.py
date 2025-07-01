@@ -7,7 +7,7 @@ longitud_crucero = 3
 longitud_acorazado = 4
 
 def celda_valida(matriz:list, fila:int, columna:int)->bool:
-    """Indica si el casillero seleccionado y sus 8 vecinos están vacíos.
+    """Indica si el casillero seleccionado y sus 8 vecinos estan vacios.
     
     Args:
     -matriz:Recibe la matriz del tablero
@@ -24,9 +24,7 @@ def celda_valida(matriz:list, fila:int, columna:int)->bool:
         for j in range(columna - 1, columna + 2):
             if 0 <= i < filas and 0 <= j < columnas and matriz[i][j] != 0: #para que no tenga ninguna celda vecina como barco
                 es_valido = False
-
     return es_valido
-
 
 def colocar_naves(matriz:list, cantidad:int, tamaño:int) -> None:
     """Coloca 'cantidad' barcos de 'tamaño' sin superponerse ni tocarse.

@@ -2,6 +2,7 @@ import pygame as pg
 import pygame.mixer as mixer
 
 mixer.init()
+
 # globales
 agua = 0
 nave_intacta = 1

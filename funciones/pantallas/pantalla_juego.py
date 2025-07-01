@@ -39,8 +39,6 @@ def pantalla_juego(pantalla:tuple, fuente:str, matriz:list, dificultad:str)->tup
         dibujar_botones(pantalla, fuente, colores, botones["VOLVER"], "VOLVER")
         pantalla.blit(fuente.render(f"Puntaje:{puntaje:04}",
                                     True, colores["negro"]), (545, 200))
-        pantalla.blit(fuente.render(f"Puntaje:{puntaje:04}",
-                                    True, colores["negro"]), (545, 200))
         
         #TITULO DEL DEBUG
         if mostrar_naves:

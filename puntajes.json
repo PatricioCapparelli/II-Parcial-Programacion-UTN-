@@ -122,5 +122,9 @@
     {
         "nick": "e",
         "puntaje": 300
+    },
+    {
+        "nick": "h",
+        "puntaje": 59
     }
 ]
