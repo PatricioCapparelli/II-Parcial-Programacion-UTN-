@@ -27,10 +27,10 @@ def dibujar_tablero(pantalla:tuple, tablero_x:int, tablero_y:int, tam_casillero:
 
             if [fila, col] in disparos_realizados: # Celda ya visitada
                 if valor == nave_impactada:  # Parte de nave dañada
-                    es_hundida = False
+                    es_hundida = False # flag
                     for nave in naves_hundidas:
-                        if [fila, col] in nave:
-                            es_hundida = True
+                        if [fila, col] in nave: # si esa parte (coordenada) pertenece a la nave hundida
+                            es_hundida = True 
                             break
                     if es_hundida:
                         color = colores["rojo"]
@@ -39,10 +39,11 @@ def dibujar_tablero(pantalla:tuple, tablero_x:int, tablero_y:int, tam_casillero:
                 else:                                       
                     color = colores["azul"] # agua impactada
             else:     # Celda sin revelar
-                if mostrar_naves and valor == nave_intacta: # Mostrar naves (debug)
+                if mostrar_naves and valor == nave_intacta: # si recibe el evento 'D' y la posicion es 1 
                     color = colores["verde"]    
                 else:
                     color = colores["celeste"]
 
+            #pinta los casilleros
             pg.draw.rect(pantalla, color, (x, y, tam_casillero, tam_casillero))
             pg.draw.rect(pantalla, colores["negro"], (x, y, tam_casillero, tam_casillero), 1)

@@ -1,7 +1,7 @@
 import pygame as pg
 from funciones.recursos.botones import dibujar_botones
 
-def aviso(pantalla:tuple, fuente:str, colores:dict, mensaje:str, ms:int=1500, color_relleno:tuple="rojo", ancho:int=440, alto:int=70, offset_y:int=100):
+def aviso(pantalla:tuple, fuente:str, colores:dict, mensaje:str, ms:int=1500, color_relleno:tuple="rojo", ancho:int=440, alto:int=70, espacio_de_y:int=100):
     '''Se encarga de avisar al jugador de que elija un nivel antes de tocar "jugar"
 
     args:
@@ -17,15 +17,12 @@ def aviso(pantalla:tuple, fuente:str, colores:dict, mensaje:str, ms:int=1500, co
 
     Return:Ninguno
     '''
-    rect = pg.Rect(0, 0, ancho, alto)
-    rect.centerx = pantalla.get_width() // 2   # horizontal
-    rect.y = offset_y   # un poco abajo del borde superior
+    rect = pg.Rect(0, 0, ancho, alto) # aviso
+    rect.centerx = pantalla.get_width() // 2 #divide el ancho y lo posiciona
+    rect.y = espacio_de_y  # un poco abajo del borde superior
 
     dibujar_botones(pantalla, fuente, colores,
                     rect, mensaje, color_relleno=color_relleno)
 
     pg.display.flip()
     pg.time.wait(ms)
-
-    # EVENTOS DEL JUEGO
-        

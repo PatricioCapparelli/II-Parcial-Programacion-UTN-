@@ -48,7 +48,6 @@ def menu_principal(pantalla:tuple, fuente:str, colores:dict, botones:dict)->None
                             nivel = pantalla_dificultad(pantalla, fuente, colores, botones)
                             if nivel != "volver" and nivel != None:
                                 dificultad_seleccionada = nivel
-                                print(f"Nivel seleccionado: {dificultad_seleccionada}")
 
                         elif texto == "JUGAR":
                             if dificultad_seleccionada:

@@ -1,4 +1,4 @@
-def verificar_nave_hundida(tablero, fila_inicial, columna_inicial)->tuple[bool, list]:
+def verificar_nave_hundida(tablero:list, fila_inicial:int, columna_inicial:int) -> tuple[bool, list]:
     """Esta funcion se encarga de verificar si la nave disparada fue hundida o no.
 
     Args:
