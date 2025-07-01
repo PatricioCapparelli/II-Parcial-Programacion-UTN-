@@ -28,7 +28,7 @@ def celda_valida(matriz:list, fila:int, columna:int)->bool:
     return es_valido
 
 
-def colocar_naves(matriz, cantidad, tamaño) -> None:
+def colocar_naves(matriz:list, cantidad:int, tamaño:int) -> None:
     """Coloca 'cantidad' barcos de 'tamaño' sin superponerse ni tocarse.
     
     Args:

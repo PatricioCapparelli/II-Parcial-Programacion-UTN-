@@ -1,6 +1,6 @@
 import pygame as pg
 
-def pedir_nick(pantalla:tuple, fuente:str, colores:dict):
+def pedir_nick(pantalla:tuple, fuente:str, colores:dict)->str:
     '''Esta funcion se encarga de solicitar al jugador que introduzca el nick
     
     Args:

@@ -5,7 +5,7 @@ from funciones.recursos.botones import dibujar_botones
 
 mixer.init()
 
-def pantalla_victoria(pantalla:tuple, fuente:str, colores:dict, botones:dict, evento:tuple):
+def pantalla_victoria(pantalla:tuple, fuente:str, colores:dict, botones:dict, evento:tuple)->bool:
     """Esta funcion se encarga de administrar la pantalla de victoria
 
     Args:

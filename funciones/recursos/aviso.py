@@ -1,7 +1,7 @@
 import pygame as pg
 from funciones.recursos.botones import dibujar_botones
 
-def aviso(pantalla:tuple, fuente:str, colores:dict, mensaje:str, ms:int=1500, color_relleno:tuple="rojo", ancho:int=440, alto:int=70, offset_y=100):
+def aviso(pantalla:tuple, fuente:str, colores:dict, mensaje:str, ms:int=1500, color_relleno:tuple="rojo", ancho:int=440, alto:int=70, offset_y:int=100):
     '''Se encarga de avisar al jugador de que elija un nivel antes de tocar "jugar"
 
     args:

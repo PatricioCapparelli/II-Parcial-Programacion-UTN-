@@ -1,6 +1,6 @@
 import pygame as pg
 
-def dibujar_botones(pantalla, fuente, colores, rect, texto, color_relleno="celeste", color_fuente="negro"):
+def dibujar_botones(pantalla:tuple, fuente:str, colores:dict, rect:tuple, texto:str, color_relleno:tuple="celeste", color_fuente:tuple="negro"):
     '''Esta funcion se encarga de dibujar los botones del juego.
     
     Args:
@@ -22,7 +22,7 @@ def dibujar_botones(pantalla, fuente, colores, rect, texto, color_relleno="celes
             rect.y + (rect.height - texto_render.get_height()) // 2)
     )
 
-def botones_menu_principal(pantalla, fuente, colores, botones):
+def botones_menu_principal(pantalla:tuple, fuente:str, colores:dict, botones:dict):
     '''Esta funcion se encarga de dibujar todos los botones del menu principal
     
     Args:
@@ -37,7 +37,7 @@ def botones_menu_principal(pantalla, fuente, colores, botones):
             break   
         dibujar_botones(pantalla, fuente, colores, rect, texto)
 
-def botones_juego(pantalla, fuente, colores, botones, evento, resultado, corriendo):
+def botones_juego(pantalla:tuple, fuente:str, colores:dict, botones:dict, evento:tuple, resultado:str, corriendo:bool)->tuple[str, bool]:
     '''Esta funcion se encarga de mostrar los botones de la partida
     
     Args:
