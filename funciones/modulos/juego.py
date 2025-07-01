@@ -8,8 +8,8 @@ from funciones.pantallas.pantalla_pedir_nick import pedir_nick
 def jugar(pantalla:tuple, fuente:str, colores:tuple, dificultad:str, nick:str=None)->int:
     '''Se encarga de mostrar la pantalla del juego iniciado.
         args:
-        -pantalla:
-        -fuente:
+        -pantalla:Recibe el tamaño de la pantalla del juego
+        -fuente:Recibe la fuente del texto
         -colores:
         -dificultad:
         -nick:

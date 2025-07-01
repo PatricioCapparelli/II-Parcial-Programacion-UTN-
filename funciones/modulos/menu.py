@@ -10,7 +10,7 @@ from funciones.recursos.aviso import aviso
 
 mixer.init()
 
-def menu_principal(pantalla:tuple, fondo, fuente:str, colores:dict, titulo, botones:dict)->None:
+def menu_principal(pantalla:tuple, fuente:str, colores:dict, botones:dict)->None:
     '''Se encarga de la interaccion con el menú
         Args:
         -pantalla:
@@ -21,6 +21,9 @@ def menu_principal(pantalla:tuple, fondo, fuente:str, colores:dict, titulo, boto
         -botones:Recibe el diccionario de los botones
         Returno:Ninguno
         '''
+    titulo = pg.image.load("publico/imagenes/05.png")
+    titulo = pg.transform.scale(titulo,(800,140))
+    fondo = pg.image.load("publico/imagenes/03.jpg")
     dificultad_seleccionada = None
     nick = None
     corriendo = True
