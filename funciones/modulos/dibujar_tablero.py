@@ -3,7 +3,7 @@ from funciones.pantallas.pantalla_juego import *
 from funciones.pantallas.pantalla import *
 
 def dibujar_tablero(pantalla:tuple, tablero_x:int, tablero_y:int, tam_casillero:int, margen:int, matriz:list, disparos_realizados:list, naves_hundidas:list, mostrar_naves:bool, nave_intacta:int):
-    '''Esta funcion se encarga de dibujar el tablero, verificar nave impactada y nave hundida, a la vez que pinta los casilleros de colores segun si está impactada, hundida o es agua.
+    '''Esta funcion se encarga de dibujar el tablero, verificar nave impactada y nave hundida, a la vez que pinta los casilleros de colores segun si esta impactada, hundida o es agua.
     
     Args:
     -pantalla:Recibe el tamaño de la pantalla del juego

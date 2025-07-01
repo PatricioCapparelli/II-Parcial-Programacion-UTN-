@@ -41,13 +41,14 @@ def pantalla_juego(pantalla:tuple, fuente:str, matriz:list, dificultad:str)->tup
                                     True, colores["negro"]), (545, 200))
         pantalla.blit(fuente.render(f"Puntaje:{puntaje:04}",
                                     True, colores["negro"]), (545, 200))
-
+        
+        #TITULO DEL DEBUG
         if mostrar_naves:
             pantalla.blit(fuente.render("MODO DEBUG: ACTIVADO", True, colores["rojo"]), (545, 250))
             
         # TODAS LAS NAVES HUNDIDAS?
         if juego_terminado == False:
-            if sum(fila.count(nave_intacta) for fila in matriz) == 0: # suma todas las naves intactas y si da 0, termina el juego
+            if sum(fila.count(nave_intacta) for fila in matriz) == 0: # suma todas las naves intactas y si da 0 es decir si no encuentra ningun 1, termina el juego
                 juego_terminado = True
                 mixer.music.load("publico/musica/Musica_victoria.mp3")
                 mixer.music.set_volume(0.4)
@@ -63,16 +64,16 @@ def pantalla_juego(pantalla:tuple, fuente:str, matriz:list, dificultad:str)->tup
             elif evento.type == pg.MOUSEBUTTONDOWN and evento.button == 1:
                 # Botones
                 resultado, corriendo = botones_juego(pantalla, fuente, colores, botones, evento, resultado, corriendo)
-                    # Disparo
+                # Disparo
                 col = (evento.pos[0] - tablero_x) // (tam_casillero + margen) # convierte el click en una coordenada del tablero en columna
                 fila = (evento.pos[1] - tablero_y) // (tam_casillero + margen) # ... en fila
 
-                if (0 <= fila < len(matriz) and 0 <= col < len(matriz[0]) and juego_terminado == False and [fila, col] not in disparos_realizados): # validacion para poder jugar, clickear un casillero valido
+                if (0 <= fila < len(matriz) and 0 <= col < len(matriz[0]) and juego_terminado == False and [fila, col] not in disparos_realizados): # validacion para poder jugar, clickear un casillero valido y verificar si se hundio una nave.
 
-                        disparos_realizados.append([fila, col])
+                        disparos_realizados.append([fila, col]) #se captura el disparo (coordenadas) y se agrega a la lista
 
                         if matriz[fila][col] == nave_intacta:        # Impacto
-                            matriz[fila][col] = nave_impactada
+                            matriz[fila][col] = nave_impactada # se le agrega un 3 en esa celda
                             puntaje += 5
                             disparo_acertado = mixer.Sound("publico/sonidos/explosion.mp3")
                             disparo_acertado.set_volume(0.2)
@@ -94,6 +95,8 @@ def pantalla_juego(pantalla:tuple, fuente:str, matriz:list, dificultad:str)->tup
             accion = pantalla_victoria(pantalla, fuente, colores, botones, evento)
             if accion: # VOLVER AL MENU
                 resultado = "volver a menu"
+                mixer.music.stop() 
+                mixer.music.unload()
                 corriendo = False
 
         pg.display.flip()
