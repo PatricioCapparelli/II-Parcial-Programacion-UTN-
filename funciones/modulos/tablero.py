@@ -45,7 +45,7 @@ def colocar_naves(matriz:list, cantidad:int, tamaño:int) -> None:
         if horiz:                              # Horizontal
             fila = random.randint(0, filas - 1)
             columna = random.randint(0, columnas - tamaño)
-            libre = all(celda_valida(matriz, fila, columna + i) for i in range(tamaño))
+            libre = all(celda_valida(matriz, fila, columna + i) for i in range(tamaño)) 
             if libre:
                 for i in range(tamaño):
                     matriz[fila][columna + i] = 1
@@ -56,7 +56,7 @@ def colocar_naves(matriz:list, cantidad:int, tamaño:int) -> None:
             libre = all(celda_valida(matriz, fila + i, columna) for i in range(tamaño))
             if libre:
                 for i in range(tamaño):
-                    matriz[fila + i][columna] = 1
+                    matriz[fila + i][columna] = 1 #parte de nave intacta
                 colocadas += 1
 
 def crear_tablero_inicial(nivel: str) -> list:
