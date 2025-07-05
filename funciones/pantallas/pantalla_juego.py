@@ -31,7 +31,7 @@ def pantalla_juego(pantalla:tuple, fuente:str, matriz:list, dificultad:str)->tup
     resultado = "finalizado"
     juego_terminado = False
     mostrar_naves = False      # Modo debug
-
+    
     while corriendo:
         pantalla.blit(pg.image.load("publico/imagenes/02.jpg"), (0, 0))
         dibujar_tablero(pantalla, tablero_x, tablero_y, tam_casillero, margen, matriz, disparos_realizados, naves_hundidas, mostrar_naves, nave_intacta)
@@ -98,5 +98,8 @@ def pantalla_juego(pantalla:tuple, fuente:str, matriz:list, dificultad:str)->tup
                 corriendo = False
 
         pg.display.flip()
+    if corriendo == False:
+        from funciones.modulos.menu import menu_principal
+        menu_principal(pantalla, fuente, colores, botones)
 
     return resultado, puntaje
